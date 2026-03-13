@@ -1,0 +1,139 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "applepay": "https://developer.apple.com/schemas/apple-pay/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "PaymentRequest": {
+      "@id": "applepay:PaymentRequest",
+      "@context": {
+        "countryCode": "schema:addressCountry",
+        "currencyCode": "schema:priceCurrency",
+        "supportedNetworks": "applepay:supportedNetworks",
+        "merchantCapabilities": "applepay:merchantCapabilities",
+        "total": "schema:totalPrice",
+        "lineItems": "applepay:lineItems",
+        "shippingType": "applepay:shippingType",
+        "supportedCountries": "applepay:supportedCountries"
+      }
+    },
+
+    "LineItem": {
+      "@id": "applepay:LineItem",
+      "@context": {
+        "label": "schema:name",
+        "amount": {
+          "@id": "schema:price",
+          "@type": "xsd:decimal"
+        },
+        "type": "applepay:lineItemType",
+        "paymentTiming": "applepay:paymentTiming"
+      }
+    },
+
+    "PaymentToken": {
+      "@id": "applepay:PaymentToken",
+      "@context": {
+        "transactionIdentifier": "schema:identifier",
+        "paymentData": "applepay:paymentData",
+        "paymentMethod": "applepay:paymentMethod"
+      }
+    },
+
+    "PaymentData": {
+      "@id": "applepay:PaymentData",
+      "@context": {
+        "data": "applepay:encryptedData",
+        "signature": "applepay:signature",
+        "header": "applepay:header",
+        "version": "applepay:tokenVersion"
+      }
+    },
+
+    "PaymentDataHeader": {
+      "@id": "applepay:PaymentDataHeader",
+      "@context": {
+        "ephemeralPublicKey": "applepay:ephemeralPublicKey",
+        "wrappedKey": "applepay:wrappedKey",
+        "publicKeyHash": "applepay:publicKeyHash",
+        "transactionId": "schema:identifier"
+      }
+    },
+
+    "PaymentMethod": {
+      "@id": "applepay:PaymentMethod",
+      "@context": {
+        "displayName": "schema:name",
+        "network": "applepay:paymentNetwork",
+        "type": "applepay:cardType"
+      }
+    },
+
+    "PaymentContact": {
+      "@id": "applepay:PaymentContact",
+      "@context": {
+        "givenName": "schema:givenName",
+        "familyName": "schema:familyName",
+        "emailAddress": "schema:email",
+        "phoneNumber": "schema:telephone",
+        "addressLines": "schema:streetAddress",
+        "locality": "schema:addressLocality",
+        "administrativeArea": "schema:addressRegion",
+        "postalCode": "schema:postalCode",
+        "country": "schema:addressCountry",
+        "countryCode": "applepay:countryCode"
+      }
+    },
+
+    "MerchantSession": {
+      "@id": "applepay:MerchantSession",
+      "@context": {
+        "merchantSessionIdentifier": "schema:identifier",
+        "merchantIdentifier": "applepay:merchantIdentifier",
+        "displayName": "schema:name",
+        "domainName": "applepay:domainName",
+        "epochTimestamp": {
+          "@id": "dcterms:created",
+          "@type": "xsd:integer"
+        },
+        "expiresAt": {
+          "@id": "schema:expires",
+          "@type": "xsd:integer"
+        },
+        "nonce": "applepay:nonce",
+        "signature": "applepay:signature"
+      }
+    },
+
+    "ShippingMethod": {
+      "@id": "applepay:ShippingMethod",
+      "@context": {
+        "label": "schema:name",
+        "detail": "schema:description",
+        "amount": {
+          "@id": "schema:price",
+          "@type": "xsd:decimal"
+        },
+        "identifier": "schema:identifier"
+      }
+    },
+
+    "DecryptedPaymentData": {
+      "@id": "applepay:DecryptedPaymentData",
+      "@context": {
+        "applicationPrimaryAccountNumber": "applepay:dpan",
+        "applicationExpirationDate": "applepay:dpanExpiration",
+        "currencyCode": "schema:priceCurrency",
+        "transactionAmount": {
+          "@id": "schema:price",
+          "@type": "xsd:decimal"
+        },
+        "cardholderName": "schema:name",
+        "deviceManufacturerIdentifier": "applepay:deviceManufacturerIdentifier",
+        "paymentDataType": "applepay:paymentDataType"
+      }
+    }
+  }
+}

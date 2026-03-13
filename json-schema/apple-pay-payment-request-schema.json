@@ -1,0 +1,369 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.apple.com/schemas/apple-pay/payment-request.json",
+  "title": "Apple Pay Payment Request",
+  "description": "Represents an ApplePayPaymentRequest used to configure an Apple Pay payment session, specifying the merchant capabilities, supported networks, payment amount, and optional shipping and billing requirements.",
+  "type": "object",
+  "required": [
+    "countryCode",
+    "currencyCode",
+    "supportedNetworks",
+    "merchantCapabilities",
+    "total"
+  ],
+  "properties": {
+    "countryCode": {
+      "type": "string",
+      "description": "The two-letter ISO 3166-1 alpha-2 country code for the merchant's country of operation",
+      "pattern": "^[A-Z]{2}$",
+      "examples": ["US", "GB", "CA"]
+    },
+    "currencyCode": {
+      "type": "string",
+      "description": "The three-letter ISO 4217 currency code for the payment",
+      "pattern": "^[A-Z]{3}$",
+      "examples": ["USD", "GBP", "EUR"]
+    },
+    "supportedNetworks": {
+      "type": "array",
+      "description": "The payment networks the merchant supports",
+      "items": {
+        "type": "string",
+        "enum": [
+          "visa",
+          "masterCard",
+          "amex",
+          "discover",
+          "jcb",
+          "chinaUnionPay",
+          "interac",
+          "privateLabel",
+          "eftpos",
+          "cartesBancaires",
+          "iD",
+          "quicPay",
+          "suica",
+          "mada",
+          "bancomat",
+          "bancontact",
+          "girocard"
+        ]
+      },
+      "minItems": 1
+    },
+    "merchantCapabilities": {
+      "type": "array",
+      "description": "The payment capabilities the merchant supports",
+      "items": {
+        "type": "string",
+        "enum": [
+          "supports3DS",
+          "supportsEMV",
+          "supportsCredit",
+          "supportsDebit"
+        ]
+      },
+      "minItems": 1
+    },
+    "total": {
+      "$ref": "#/$defs/LineItem",
+      "description": "The total amount for the payment, including the merchant name as the label"
+    },
+    "lineItems": {
+      "type": "array",
+      "description": "A list of line items explaining the charges, such as subtotal, tax, discount, and shipping",
+      "items": {
+        "$ref": "#/$defs/LineItem"
+      }
+    },
+    "requiredBillingContactFields": {
+      "type": "array",
+      "description": "The billing contact fields required to process the payment",
+      "items": {
+        "$ref": "#/$defs/ContactField"
+      }
+    },
+    "requiredShippingContactFields": {
+      "type": "array",
+      "description": "The shipping contact fields required to fulfill the order",
+      "items": {
+        "$ref": "#/$defs/ContactField"
+      }
+    },
+    "shippingMethods": {
+      "type": "array",
+      "description": "Available shipping methods for the order",
+      "items": {
+        "$ref": "#/$defs/ShippingMethod"
+      }
+    },
+    "shippingType": {
+      "type": "string",
+      "description": "The type of shipping used for this request, which determines the wording on the payment sheet",
+      "enum": [
+        "shipping",
+        "delivery",
+        "storePickup",
+        "servicePickup"
+      ],
+      "default": "shipping"
+    },
+    "shippingContactEditingMode": {
+      "type": "string",
+      "description": "Controls whether the shipping contact can be edited on the payment sheet",
+      "enum": [
+        "enabled",
+        "storePickup"
+      ]
+    },
+    "applicationData": {
+      "type": "string",
+      "description": "Base64-encoded application-specific data that is included in the payment token hash for verification"
+    },
+    "supportedCountries": {
+      "type": "array",
+      "description": "A list of ISO 3166-1 alpha-2 country codes for cards that can be used for payment. If not specified, all countries are supported",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]{2}$"
+      }
+    },
+    "recurringPaymentRequest": {
+      "$ref": "#/$defs/RecurringPaymentRequest"
+    },
+    "automaticReloadPaymentRequest": {
+      "$ref": "#/$defs/AutomaticReloadPaymentRequest"
+    },
+    "multiTokenContexts": {
+      "type": "array",
+      "description": "An array of payment token contexts for multi-merchant payments",
+      "items": {
+        "$ref": "#/$defs/PaymentTokenContext"
+      }
+    }
+  },
+  "$defs": {
+    "LineItem": {
+      "type": "object",
+      "required": ["label", "amount"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "A short, localized description of the line item"
+        },
+        "amount": {
+          "type": "string",
+          "description": "The monetary amount of the line item as a string with decimal notation",
+          "pattern": "^-?\\d+\\.\\d{2}$"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["final", "pending"],
+          "default": "final",
+          "description": "Whether this is a final or pending amount"
+        },
+        "paymentTiming": {
+          "type": "string",
+          "enum": [
+            "immediate",
+            "recurring",
+            "deferred",
+            "automaticReload"
+          ],
+          "description": "When the payment will be taken"
+        },
+        "recurringPaymentStartDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start date for recurring payments"
+        },
+        "recurringPaymentIntervalUnit": {
+          "type": "string",
+          "enum": ["year", "month", "day", "hour", "minute"],
+          "description": "The interval unit for recurring payments"
+        },
+        "recurringPaymentIntervalCount": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "The number of interval units between recurring payments"
+        },
+        "recurringPaymentEndDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date for recurring payments"
+        },
+        "deferredPaymentDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date for a deferred payment"
+        },
+        "automaticReloadPaymentThresholdAmount": {
+          "type": "string",
+          "description": "The balance threshold that triggers an automatic reload"
+        }
+      }
+    },
+    "ContactField": {
+      "type": "string",
+      "enum": [
+        "email",
+        "name",
+        "phone",
+        "postalAddress",
+        "phoneticName"
+      ],
+      "description": "A contact field that can be requested from the user"
+    },
+    "ShippingMethod": {
+      "type": "object",
+      "required": ["label", "detail", "amount", "identifier"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "A short description of the shipping method"
+        },
+        "detail": {
+          "type": "string",
+          "description": "A longer description of the shipping method"
+        },
+        "amount": {
+          "type": "string",
+          "description": "The cost of the shipping method",
+          "pattern": "^-?\\d+\\.\\d{2}$"
+        },
+        "identifier": {
+          "type": "string",
+          "description": "A unique identifier for the shipping method"
+        },
+        "dateComponentsRange": {
+          "type": "object",
+          "description": "Estimated delivery date range",
+          "properties": {
+            "startDateComponents": {
+              "$ref": "#/$defs/DateComponents"
+            },
+            "endDateComponents": {
+              "$ref": "#/$defs/DateComponents"
+            }
+          }
+        }
+      }
+    },
+    "DateComponents": {
+      "type": "object",
+      "properties": {
+        "era": { "type": "integer" },
+        "year": { "type": "integer" },
+        "month": { "type": "integer" },
+        "day": { "type": "integer" },
+        "hours": { "type": "integer" },
+        "minutes": { "type": "integer" },
+        "seconds": { "type": "integer" },
+        "calendar": { "type": "string" }
+      }
+    },
+    "RecurringPaymentRequest": {
+      "type": "object",
+      "required": [
+        "paymentDescription",
+        "regularBilling",
+        "managementURL"
+      ],
+      "description": "Configuration for recurring payments",
+      "properties": {
+        "paymentDescription": {
+          "type": "string",
+          "description": "A description of the recurring payment"
+        },
+        "regularBilling": {
+          "$ref": "#/$defs/LineItem",
+          "description": "The regular billing amount and interval"
+        },
+        "trialBilling": {
+          "$ref": "#/$defs/LineItem",
+          "description": "The trial billing amount and interval, if applicable"
+        },
+        "billingAgreement": {
+          "type": "string",
+          "description": "A localized billing agreement for display to the user"
+        },
+        "managementURL": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URL to manage the recurring payment"
+        },
+        "tokenNotificationURL": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URL for receiving lifecycle notifications for the merchant token"
+        }
+      }
+    },
+    "AutomaticReloadPaymentRequest": {
+      "type": "object",
+      "required": [
+        "paymentDescription",
+        "automaticReloadBilling",
+        "managementURL"
+      ],
+      "description": "Configuration for automatic reload payments (e.g., store cards)",
+      "properties": {
+        "paymentDescription": {
+          "type": "string",
+          "description": "A description of the automatic reload payment"
+        },
+        "automaticReloadBilling": {
+          "$ref": "#/$defs/LineItem",
+          "description": "The automatic reload billing amount"
+        },
+        "billingAgreement": {
+          "type": "string",
+          "description": "A localized billing agreement for display"
+        },
+        "managementURL": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URL to manage the automatic reload"
+        },
+        "tokenNotificationURL": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URL for receiving lifecycle notifications"
+        }
+      }
+    },
+    "PaymentTokenContext": {
+      "type": "object",
+      "required": [
+        "merchantIdentifier",
+        "externalIdentifier",
+        "merchantName",
+        "merchantDomain",
+        "amount"
+      ],
+      "description": "Context for multi-merchant payment tokens",
+      "properties": {
+        "merchantIdentifier": {
+          "type": "string",
+          "description": "The merchant identifier for this context"
+        },
+        "externalIdentifier": {
+          "type": "string",
+          "description": "An external identifier for the merchant"
+        },
+        "merchantName": {
+          "type": "string",
+          "description": "The merchant's display name"
+        },
+        "merchantDomain": {
+          "type": "string",
+          "description": "The merchant's domain"
+        },
+        "amount": {
+          "type": "string",
+          "description": "The amount for this merchant's portion"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,280 @@
+openapi: 3.1.0
+info:
+  title: Apple Pay JS API
+  description: >-
+    Server-side REST API used in conjunction with the Apple Pay JS client-side
+    JavaScript API for processing Apple Pay payments on the web. Merchants call
+    Apple's payment gateway to validate their merchant identity and obtain a
+    payment session, which is then used by the client-side ApplePaySession to
+    authorize payments via Touch ID or Face ID in Safari.
+  version: '1.0'
+  contact:
+    name: Apple Developer Support
+    url: https://developer.apple.com/support/apple-pay/
+  termsOfService: https://developer.apple.com/apple-pay/acceptable-use-guidelines/
+externalDocs:
+  description: Apple Pay on the Web Documentation
+  url: https://developer.apple.com/documentation/apple_pay_on_the_web
+servers:
+  - url: https://apple-pay-gateway.apple.com/paymentservices
+    description: Apple Pay Production Gateway
+  - url: https://apple-pay-gateway-nc-pod5.apple.com/paymentservices
+    description: Apple Pay Sandbox Gateway
+tags:
+  - name: Merchant Validation
+    description: Validate merchant identity and obtain payment sessions
+  - name: Merchant Registration
+    description: Register and manage merchant domains for Apple Pay on the Web
+security:
+  - merchantCertificate: []
+paths:
+  /paymentSession:
+    post:
+      operationId: requestPaymentSession
+      summary: Request an Apple Pay payment session
+      description: >-
+        Validates the merchant and returns an opaque payment session object.
+        The merchant server calls this endpoint when the client-side
+        ApplePaySession triggers the onvalidatemerchant event. The response
+        must be passed back to the client via session.completeMerchantValidation().
+        Requires mutual TLS authentication using the merchant identity certificate.
+      tags:
+        - Merchant Validation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentSessionRequest'
+      responses:
+        '200':
+          description: Payment session created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentSessionResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Merchant certificate authentication failed
+        '500':
+          description: Internal server error
+  /registerMerchant:
+    post:
+      operationId: registerMerchant
+      summary: Register a merchant for Apple Pay on the Web
+      description: >-
+        Registers a merchant domain for Apple Pay on the Web. The merchant
+        must host a domain verification file at
+        /.well-known/apple-developer-merchantid-domain-association before
+        calling this endpoint.
+      tags:
+        - Merchant Registration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MerchantRegistrationRequest'
+      responses:
+        '200':
+          description: Merchant domain registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantRegistrationResponse'
+        '400':
+          description: Invalid request or domain verification failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Authentication failed
+  /domains:
+    get:
+      operationId: listMerchantDomains
+      summary: List registered merchant domains
+      description: >-
+        Returns a list of domains that have been registered for Apple Pay
+        on the Web for the authenticated merchant.
+      tags:
+        - Merchant Registration
+      parameters:
+        - name: merchantIdentifier
+          in: query
+          required: true
+          description: The merchant identifier issued by Apple
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of registered domains
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantDomainsResponse'
+        '401':
+          description: Authentication failed
+    delete:
+      operationId: removeMerchantDomain
+      summary: Remove a registered merchant domain
+      description: >-
+        Removes a previously registered domain from the merchant's Apple Pay
+        on the Web configuration.
+      tags:
+        - Merchant Registration
+      parameters:
+        - name: merchantIdentifier
+          in: query
+          required: true
+          description: The merchant identifier issued by Apple
+          schema:
+            type: string
+        - name: domainName
+          in: query
+          required: true
+          description: The domain name to remove
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Domain removed successfully
+        '401':
+          description: Authentication failed
+        '404':
+          description: Domain not found
+components:
+  securitySchemes:
+    merchantCertificate:
+      type: mutualTLS
+      description: >-
+        Mutual TLS authentication using the Apple Pay Merchant Identity
+        Certificate. The certificate is obtained from the Apple Developer
+        portal and must be associated with the merchant identifier.
+  schemas:
+    PaymentSessionRequest:
+      type: object
+      required:
+        - merchantIdentifier
+        - displayName
+        - initiative
+        - initiativeContext
+      properties:
+        merchantIdentifier:
+          type: string
+          description: >-
+            The merchant identifier registered with Apple, typically in
+            the format merchant.com.example.mystore
+          example: merchant.com.example.mystore
+        displayName:
+          type: string
+          description: >-
+            A string of 64 or fewer UTF-8 characters containing the
+            canonical name for the merchant's store, suitable for display
+          example: My Store
+        initiative:
+          type: string
+          enum:
+            - web
+            - messaging
+          description: >-
+            The payment initiative. Use 'web' for Apple Pay on the Web
+          example: web
+        initiativeContext:
+          type: string
+          description: >-
+            The fully qualified domain name associated with the merchant.
+            Must match a verified merchant domain
+          example: mystore.example.com
+    PaymentSessionResponse:
+      type: object
+      description: >-
+        An opaque payment session object that should be passed to the
+        client-side ApplePaySession.completeMerchantValidation() method
+      properties:
+        epochTimestamp:
+          type: integer
+          description: The epoch timestamp of when the session was created
+        expiresAt:
+          type: integer
+          description: The epoch timestamp of when the session expires
+        merchantSessionIdentifier:
+          type: string
+          description: A unique identifier for the merchant session
+        nonce:
+          type: string
+          description: A unique nonce for the session
+        merchantIdentifier:
+          type: string
+          description: The merchant identifier
+        domainName:
+          type: string
+          description: The verified domain name
+        displayName:
+          type: string
+          description: The merchant display name
+        signature:
+          type: string
+          description: A cryptographic signature validating the session
+        operationalAnalyticsIdentifier:
+          type: string
+          description: Identifier for analytics purposes
+        retries:
+          type: integer
+          description: Number of retries allowed
+        pspId:
+          type: string
+          description: Payment service provider identifier
+    MerchantRegistrationRequest:
+      type: object
+      required:
+        - merchantIdentifier
+        - domainNames
+      properties:
+        merchantIdentifier:
+          type: string
+          description: The Apple-issued merchant identifier
+        domainNames:
+          type: array
+          items:
+            type: string
+          description: List of domain names to register for Apple Pay
+    MerchantRegistrationResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Registration status
+        merchantIdentifier:
+          type: string
+          description: The merchant identifier
+        registeredDomains:
+          type: array
+          items:
+            type: string
+          description: List of successfully registered domains
+    MerchantDomainsResponse:
+      type: object
+      properties:
+        merchantIdentifier:
+          type: string
+          description: The merchant identifier
+        domainNames:
+          type: array
+          items:
+            type: string
+          description: List of registered domain names
+    ErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          description: Error status code
+        statusMessage:
+          type: string
+          description: Human-readable error message

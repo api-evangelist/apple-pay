@@ -2,7 +2,7 @@ name: Apple Pay API
 description: Apple Pay enables secure, simple checkouts in your app or website. Customers can purchase physical goods and services using the payment cards they've securely stored in their Wallet app.
 image: https://developer.apple.com/assets/elements/icons/apple-pay/apple-pay-96x96.png
 created: '2024-01-01'
-modified: '2024-01-01'
+modified: '2026-03-04'
 url: https://developer.apple.com/apple-pay/
 specificationVersion: '0.18'
 tags:
@@ -32,6 +32,8 @@ apis:
     url: https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentrequest
   - type: Sandbox
     url: https://developer.apple.com/apple-pay/sandbox-testing/
+  - type: OpenAPI
+    url: openapi/apple-pay-js-openapi.yml
 - name: PassKit Framework (Apple Pay)
   description: Native API for integrating Apple Pay into iOS, watchOS, and macOS applications using PassKit framework.
   image: https://developer.apple.com/assets/elements/icons/apple-pay/apple-pay-96x96.png
@@ -67,10 +69,11 @@ apis:
     url: https://developer.apple.com/documentation/passkit/apple_pay/payment_token_format_reference
   - type: Specification
     url: https://developer.apple.com/library/archive/documentation/PassKit/Reference/PaymentTokenJSON/PaymentTokenJSON.html
+  - type: OpenAPI
+    url: openapi/apple-pay-payment-token-openapi.yml
 maintainers:
-- name: Apple Developer
-  email: developer@apple.com
-  url: https://developer.apple.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
 common:
 - type: Portal
   url: https://developer.apple.com/account/
@@ -86,3 +89,9 @@ common:
   url: https://developer.apple.com/system-status/
 - type: Certificate Management
   url: https://developer.apple.com/account/resources/certificates/
+- type: JSON-LD
+  url: json-ld/apple-pay-context.jsonld
+- type: JSONSchema
+  url: json-schema/apple-pay-payment-request-schema.json
+- type: JSONSchema
+  url: json-schema/apple-pay-payment-token-schema.json
