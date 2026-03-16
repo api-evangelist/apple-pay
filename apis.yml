@@ -1,4 +1,4 @@
-name: Apple Pay API
+name: Apple Pay
 description: Apple Pay enables secure, simple checkouts in your app or website. Customers can purchase physical goods and services using the payment cards they've securely stored in their Wallet app.
 image: https://developer.apple.com/assets/elements/icons/apple-pay/apple-pay-96x96.png
 created: '2024-01-01'
