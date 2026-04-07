@@ -21,10 +21,10 @@ servers:
   - url: https://apple-pay-gateway-nc-pod5.apple.com/paymentservices
     description: Apple Pay Sandbox Gateway
 tags:
-  - name: Merchant Validation
-    description: Validate merchant identity and obtain payment sessions
   - name: Merchant Registration
     description: Register and manage merchant domains for Apple Pay on the Web
+  - name: Merchant Validation
+    description: Validate merchant identity and obtain payment sessions
 security:
   - merchantCertificate: []
 paths:
