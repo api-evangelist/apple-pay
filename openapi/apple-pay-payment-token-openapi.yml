@@ -73,7 +73,7 @@ paths:
   /payments/apple-pay/{transactionId}:
     get:
       operationId: getPaymentStatus
-      summary: Get payment transaction status
+      summary: Apple Pay Get payment transaction status
       description: >-
         Retrieves the status of a previously submitted Apple Pay payment
         transaction.
