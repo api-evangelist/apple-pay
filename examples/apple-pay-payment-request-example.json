@@ -1,0 +1,22 @@
+{
+  "countryCode": "US",
+  "currencyCode": "USD",
+  "supportedNetworks": [
+    "visa",
+    "masterCard",
+    "amex"
+  ],
+  "merchantCapabilities": [
+    "supports3DS"
+  ],
+  "total": {
+    "label": "Coffee Shop",
+    "amount": "4.99"
+  },
+  "lineItems": [
+    {
+      "label": "Flat White",
+      "amount": "4.99"
+    }
+  ]
+}

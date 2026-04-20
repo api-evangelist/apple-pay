@@ -1,0 +1,178 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: Apple Pay
+  description: >-
+    Unified vocabulary for Apple Pay covering operational API dimensions (JS API,
+    payment token processing, merchant validation) and capability dimensions
+    (checkout workflows, MCP tools, e-commerce developer personas).
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - name: Apple Pay JS API
+      namespace: apple-pay-js
+      version: "1.0"
+      baseUrl: "https://apple-pay-gateway.apple.com/paymentservices"
+      status: active
+    - name: PassKit Framework
+      namespace: apple-pay-passkit
+      version: "1.0"
+      baseUrl: native
+      status: active
+    - name: Apple Pay Payment Token API
+      namespace: apple-pay-token
+      version: "1.0"
+      baseUrl: merchant-server
+      status: active
+
+  resources:
+    - name: payment-sessions
+      description: Apple Pay merchant validation and payment session objects
+      api: Apple Pay JS API
+      actions:
+        - create
+    - name: merchant-domains
+      description: Merchant domains registered for Apple Pay on the Web
+      api: Apple Pay JS API
+      actions:
+        - register
+        - list
+        - delete
+    - name: payment-tokens
+      description: Encrypted payment tokens from Apple Pay authorizations
+      api: Apple Pay Payment Token API
+      actions:
+        - decrypt
+        - process
+
+  actions:
+    - name: create
+      httpMethod: POST
+      pattern: write
+    - name: register
+      httpMethod: POST
+      pattern: write
+    - name: list
+      httpMethod: GET
+      pattern: read
+    - name: delete
+      httpMethod: DELETE
+      pattern: destructive
+    - name: decrypt
+      httpMethod: POST
+      pattern: write
+    - name: process
+      httpMethod: POST
+      pattern: write
+
+  schemas:
+    core:
+      - name: PaymentRequest
+        description: Payment request configuration including networks, amounts, and merchant info
+      - name: PaymentToken
+        description: Encrypted Apple Pay payment token containing payment authorization data
+
+  parameters:
+    identifiers:
+      - name: merchantIdentifier
+        description: Apple Pay merchant identifier from developer account
+      - name: domainName
+        description: Domain name to register or validate for Apple Pay
+
+  enums:
+    supportedNetworks:
+      - visa
+      - masterCard
+      - amex
+      - discover
+      - jcb
+      - unionPay
+    merchantCapabilities:
+      - supports3DS
+      - supportsEMV
+      - supportsCredit
+      - supportsDebit
+    tokenVersions:
+      - EC_v1
+      - RSA_v1
+
+  authentication:
+    schemes:
+      - type: mtls
+        description: Mutual TLS using Apple Pay merchant identity certificate
+        headerName: X-Apple-Merchant-Certificate
+
+capability:
+  workflows:
+    - name: Payment Processing
+      file: capabilities/payment-processing.yaml
+      description: End-to-end Apple Pay checkout integration with merchant validation and payment token handling
+      apis:
+        - Apple Pay JS API
+      toolCount: 2
+      personas:
+        - E-Commerce Developer
+        - Payment Integration Engineer
+
+  personas:
+    - id: ecommerce-developer
+      name: E-Commerce Developer
+      description: Developer integrating Apple Pay into a web or mobile checkout experience
+      workflows:
+        - Payment Processing
+
+    - id: payment-integration-engineer
+      name: Payment Integration Engineer
+      description: Engineer building payment processing infrastructure supporting multiple payment methods
+      workflows:
+        - Payment Processing
+
+  domains:
+    - name: Merchant Management
+      description: Registering and managing merchant identity and domains for Apple Pay
+      resources:
+        - merchant-domains
+    - name: Payment Authorization
+      description: Initiating and completing Apple Pay payment authorizations
+      resources:
+        - payment-sessions
+        - payment-tokens
+
+  namespaces:
+    - name: apple-pay-js
+      type: consumed
+      baseUri: "https://apple-pay-gateway.apple.com/paymentservices"
+    - name: apple-pay-checkout-api
+      type: rest-exposed
+      port: 8080
+    - name: apple-pay-checkout-mcp
+      type: mcp-exposed
+      port: 9090
+
+  binds:
+    - name: APPLE_PAY_MERCHANT_CERT
+      description: Apple Pay merchant identity certificate for mTLS authentication
+      workflows:
+        - Payment Processing
+
+crossReference:
+  - resource: payment-sessions
+    operations:
+      - requestPaymentSession
+    workflows:
+      - Payment Processing
+    personas:
+      - E-Commerce Developer
+      - Payment Integration Engineer
+
+  - resource: merchant-domains
+    operations:
+      - registerMerchantDomain
+      - listMerchantDomains
+      - deleteMerchantDomain
+    workflows:
+      - Payment Processing
+    personas:
+      - E-Commerce Developer

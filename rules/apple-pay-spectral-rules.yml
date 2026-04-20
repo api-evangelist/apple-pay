@@ -1,0 +1,217 @@
+rules:
+
+  # INFO / METADATA
+  info-title-apple-prefix:
+    description: API title should start with "Apple Pay"
+    severity: warn
+    given: $.info
+    then:
+      field: title
+      function: pattern
+      functionOptions:
+        match: "^Apple Pay"
+
+  info-version-required:
+    description: API version must be specified
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+
+  info-description-required:
+    description: API description must be present
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: minLength
+      functionOptions:
+        min: 20
+
+  info-contact-required:
+    description: Contact information should be provided
+    severity: info
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  info-terms-of-service:
+    description: Terms of service URL should be provided for payment APIs
+    severity: warn
+    given: $.info
+    then:
+      field: termsOfService
+      function: truthy
+
+  # SERVERS
+  servers-required:
+    description: At least one server must be defined
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+
+  servers-https:
+    description: Server URLs must use HTTPS for payment APIs
+    severity: error
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: "^https://"
+
+  servers-description-required:
+    description: Each server must have a description distinguishing production from sandbox
+    severity: warn
+    given: $.servers[*]
+    then:
+      field: description
+      function: truthy
+
+  # SECURITY
+  security-defined:
+    description: Global security scheme must be defined for payment APIs
+    severity: error
+    given: $
+    then:
+      field: security
+      function: truthy
+
+  security-schemes-defined:
+    description: Security schemes must be defined in components
+    severity: error
+    given: $.components
+    then:
+      field: securitySchemes
+      function: truthy
+
+  # PATHS — NAMING
+  paths-kebab-case:
+    description: Path segments must use camelCase or kebab-case
+    severity: warn
+    given: $.paths
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: "^(/[a-zA-Z0-9{}/_-]+)+$"
+
+  # OPERATIONS
+  operation-summary-required:
+    description: Every operation must have a summary
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: summary
+      function: truthy
+
+  operation-id-required:
+    description: Every operation must have an operationId
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: operationId
+      function: truthy
+
+  operation-description-required:
+    description: Every operation must have a description
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: description
+      function: truthy
+
+  operation-tags-required:
+    description: Every operation must have at least one tag
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete]
+    then:
+      field: tags
+      function: truthy
+
+  # PARAMETERS
+  parameter-description-required:
+    description: Every parameter must have a description
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[*]
+    then:
+      field: description
+      function: truthy
+
+  # RESPONSES
+  operation-success-response-required:
+    description: Every operation must have a 2xx response
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: ['200']
+            - required: ['201']
+            - required: ['204']
+
+  response-401-for-payment-apis:
+    description: Payment APIs must define 401 Unauthorized responses
+    severity: warn
+    given: $.paths[*][post].responses
+    then:
+      field: '401'
+      function: truthy
+
+  response-description-required:
+    description: Every response must have a description
+    severity: error
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
+    then:
+      field: description
+      function: truthy
+
+  # SCHEMAS
+  schema-title-required:
+    description: Component schemas must have a title
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: title
+      function: truthy
+
+  schema-description-required:
+    description: Component schemas should have a description
+    severity: warn
+    given: $.components.schemas[*]
+    then:
+      field: description
+      function: truthy
+
+  # HTTP METHOD CONVENTIONS
+  http-get-no-request-body:
+    description: GET operations must not have a request body
+    severity: error
+    given: $.paths[*].get
+    then:
+      field: requestBody
+      function: falsy
+
+  # GENERAL QUALITY
+  no-empty-descriptions:
+    description: Descriptions must not be empty
+    severity: warn
+    given: $..description
+    then:
+      function: pattern
+      functionOptions:
+        match: ".+"
+
+  external-docs-encouraged:
+    description: External documentation links are encouraged for payment APIs
+    severity: info
+    given: $
+    then:
+      field: externalDocs
+      function: truthy

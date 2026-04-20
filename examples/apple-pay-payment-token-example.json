@@ -1,0 +1,10 @@
+{
+  "version": "EC_v1",
+  "data": "encodedPaymentData",
+  "signature": "signatureBytes",
+  "header": {
+    "ephemeralPublicKey": "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE...",
+    "publicKeyHash": "hash==",
+    "transactionId": "abc123transaction"
+  }
+}

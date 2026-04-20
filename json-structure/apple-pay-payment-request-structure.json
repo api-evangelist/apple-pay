@@ -1,0 +1,153 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "name": "Apple Pay Payment Request",
+  "$id": "https://developer.apple.com/schemas/apple-pay/payment-request.json",
+  "description": "Represents an ApplePayPaymentRequest used to configure an Apple Pay payment session, specifying the merchant capabilities, supported networks, payment amount, and optional shipping and billing requirements.",
+  "type": "object",
+  "properties": {
+    "countryCode": {
+      "type": "string",
+      "description": "The two-letter ISO 3166-1 alpha-2 country code for the merchant's country of operation",
+      "pattern": "^[A-Z]{2}$",
+      "examples": [
+        "US",
+        "GB",
+        "CA"
+      ]
+    },
+    "currencyCode": {
+      "type": "string",
+      "description": "The three-letter ISO 4217 currency code for the payment",
+      "pattern": "^[A-Z]{3}$",
+      "examples": [
+        "USD",
+        "GBP",
+        "EUR"
+      ]
+    },
+    "supportedNetworks": {
+      "type": "array",
+      "description": "The payment networks the merchant supports",
+      "items": {
+        "type": "string",
+        "enum": [
+          "visa",
+          "masterCard",
+          "amex",
+          "discover",
+          "jcb",
+          "chinaUnionPay",
+          "interac",
+          "privateLabel",
+          "eftpos",
+          "cartesBancaires",
+          "iD",
+          "quicPay",
+          "suica",
+          "mada",
+          "bancomat",
+          "bancontact",
+          "girocard"
+        ]
+      },
+      "minItems": 1
+    },
+    "merchantCapabilities": {
+      "type": "array",
+      "description": "The payment capabilities the merchant supports",
+      "items": {
+        "type": "string",
+        "enum": [
+          "supports3DS",
+          "supportsEMV",
+          "supportsCredit",
+          "supportsDebit"
+        ]
+      },
+      "minItems": 1
+    },
+    "total": {
+      "$ref": "#/$defs/LineItem",
+      "description": "The total amount for the payment, including the merchant name as the label"
+    },
+    "lineItems": {
+      "type": "array",
+      "description": "A list of line items explaining the charges, such as subtotal, tax, discount, and shipping",
+      "items": {
+        "$ref": "#/$defs/LineItem"
+      }
+    },
+    "requiredBillingContactFields": {
+      "type": "array",
+      "description": "The billing contact fields required to process the payment",
+      "items": {
+        "$ref": "#/$defs/ContactField"
+      }
+    },
+    "requiredShippingContactFields": {
+      "type": "array",
+      "description": "The shipping contact fields required to fulfill the order",
+      "items": {
+        "$ref": "#/$defs/ContactField"
+      }
+    },
+    "shippingMethods": {
+      "type": "array",
+      "description": "Available shipping methods for the order",
+      "items": {
+        "$ref": "#/$defs/ShippingMethod"
+      }
+    },
+    "shippingType": {
+      "type": "string",
+      "description": "The type of shipping used for this request, which determines the wording on the payment sheet",
+      "enum": [
+        "shipping",
+        "delivery",
+        "storePickup",
+        "servicePickup"
+      ],
+      "default": "shipping"
+    },
+    "shippingContactEditingMode": {
+      "type": "string",
+      "description": "Controls whether the shipping contact can be edited on the payment sheet",
+      "enum": [
+        "enabled",
+        "storePickup"
+      ]
+    },
+    "applicationData": {
+      "type": "string",
+      "description": "Base64-encoded application-specific data that is included in the payment token hash for verification"
+    },
+    "supportedCountries": {
+      "type": "array",
+      "description": "A list of ISO 3166-1 alpha-2 country codes for cards that can be used for payment. If not specified, all countries are supported",
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]{2}$"
+      }
+    },
+    "recurringPaymentRequest": {
+      "$ref": "#/$defs/RecurringPaymentRequest"
+    },
+    "automaticReloadPaymentRequest": {
+      "$ref": "#/$defs/AutomaticReloadPaymentRequest"
+    },
+    "multiTokenContexts": {
+      "type": "array",
+      "description": "An array of payment token contexts for multi-merchant payments",
+      "items": {
+        "$ref": "#/$defs/PaymentTokenContext"
+      }
+    }
+  },
+  "required": [
+    "countryCode",
+    "currencyCode",
+    "supportedNetworks",
+    "merchantCapabilities",
+    "total"
+  ]
+}
