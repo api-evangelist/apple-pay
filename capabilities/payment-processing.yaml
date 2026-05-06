@@ -1,95 +1,128 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
   label: Apple Pay Payment Processing
-  description: >-
-    Workflow capability for integrating Apple Pay into e-commerce and mobile payment
-    flows. Combines merchant validation, payment session management, and payment token
-    processing into a unified workflow for e-commerce developers and payment integration
-    engineers enabling secure, one-touch checkout on Apple devices.
+  description: Workflow capability for integrating Apple Pay into e-commerce and mobile payment flows. Combines merchant validation,
+    payment session management, and payment token processing into a unified workflow for e-commerce developers and payment
+    integration engineers enabling secure, one-touch checkout on Apple devices.
   tags:
-    - Apple Pay
-    - Payments
-    - E-Commerce
-    - Checkout
-    - Mobile Payments
-  created: "2026-04-19"
-  modified: "2026-04-19"
-
+  - Apple Pay
+  - Payments
+  - E-Commerce
+  - Checkout
+  - Mobile Payments
+  created: '2026-04-19'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      APPLE_PAY_MERCHANT_CERT: APPLE_PAY_MERCHANT_CERT
-
+- namespace: env
+  keys:
+    APPLE_PAY_MERCHANT_CERT: APPLE_PAY_MERCHANT_CERT
 capability:
   consumes:
-    - import: apple-pay-js
-      location: ./shared/apple-pay-js.yaml
-
+  - type: http
+    namespace: apple-pay-js
+    baseUri: https://apple-pay-gateway.apple.com/paymentservices
+    description: Apple Pay JS API for merchant validation and payment session management
+    authentication:
+      type: apikey
+      key: X-Apple-Merchant-Certificate
+      value: '{{APPLE_PAY_MERCHANT_CERT}}'
+      placement: header
+    resources:
+    - name: payment-session
+      path: /paymentSession
+      description: Merchant validation and payment session creation
+      operations:
+      - name: request-payment-session
+        method: POST
+        description: Validates merchant identity and returns a payment session object
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            merchantIdentifier: '{{tools.merchantIdentifier}}'
+            domainName: '{{tools.domainName}}'
+            displayName: '{{tools.displayName}}'
+    - name: merchant-domains
+      path: /merchantDomains
+      description: Merchant domain registration
+      operations:
+      - name: register-merchant-domain
+        method: POST
+        description: Registers a domain for Apple Pay on the Web
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            domainName: '{{tools.domainName}}'
   exposes:
-    - type: rest
-      port: 8080
-      namespace: apple-pay-checkout-api
-      description: Unified REST API for Apple Pay checkout integration.
-      resources:
-        - path: /v1/payment-sessions
-          name: payment-sessions
-          description: Apple Pay merchant validation and payment session
-          operations:
-            - method: POST
-              name: validate-merchant
-              description: Validates merchant and obtains Apple Pay payment session
-              call: "apple-pay-js.request-payment-session"
-              with:
-                merchantIdentifier: "rest.merchantIdentifier"
-                domainName: "rest.domainName"
-                displayName: "rest.displayName"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/merchant-domains
-          name: merchant-domains
-          description: Merchant domain management for Apple Pay
-          operations:
-            - method: POST
-              name: register-domain
-              description: Register a domain for Apple Pay on the Web
-              call: "apple-pay-js.register-merchant-domain"
-              with:
-                domainName: "rest.domainName"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: apple-pay-checkout-mcp
-      transport: http
-      description: MCP server for AI-assisted Apple Pay checkout integration.
-      tools:
-        - name: validate-apple-pay-merchant
-          description: Validates merchant identity with Apple and returns a payment session object for completing checkout
-          hints:
-            readOnly: false
-            destructive: false
-          call: "apple-pay-js.request-payment-session"
-          with:
-            merchantIdentifier: "tools.merchantIdentifier"
-            domainName: "tools.domainName"
-            displayName: "tools.displayName"
-          outputParameters:
-            - type: object
-              mapping: "$."
-
-        - name: register-apple-pay-domain
-          description: Registers a merchant domain to accept Apple Pay on the Web payments
-          hints:
-            readOnly: false
-            destructive: false
-          call: "apple-pay-js.register-merchant-domain"
-          with:
-            domainName: "tools.domainName"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: apple-pay-checkout-api
+    description: Unified REST API for Apple Pay checkout integration.
+    resources:
+    - path: /v1/payment-sessions
+      name: payment-sessions
+      description: Apple Pay merchant validation and payment session
+      operations:
+      - method: POST
+        name: validate-merchant
+        description: Validates merchant and obtains Apple Pay payment session
+        call: apple-pay-js.request-payment-session
+        with:
+          merchantIdentifier: rest.merchantIdentifier
+          domainName: rest.domainName
+          displayName: rest.displayName
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/merchant-domains
+      name: merchant-domains
+      description: Merchant domain management for Apple Pay
+      operations:
+      - method: POST
+        name: register-domain
+        description: Register a domain for Apple Pay on the Web
+        call: apple-pay-js.register-merchant-domain
+        with:
+          domainName: rest.domainName
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: apple-pay-checkout-mcp
+    transport: http
+    description: MCP server for AI-assisted Apple Pay checkout integration.
+    tools:
+    - name: validate-apple-pay-merchant
+      description: Validates merchant identity with Apple and returns a payment session object for completing checkout
+      hints:
+        readOnly: false
+        destructive: false
+      call: apple-pay-js.request-payment-session
+      with:
+        merchantIdentifier: tools.merchantIdentifier
+        domainName: tools.domainName
+        displayName: tools.displayName
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: register-apple-pay-domain
+      description: Registers a merchant domain to accept Apple Pay on the Web payments
+      hints:
+        readOnly: false
+        destructive: false
+      call: apple-pay-js.register-merchant-domain
+      with:
+        domainName: tools.domainName
+      outputParameters:
+      - type: object
+        mapping: $.
