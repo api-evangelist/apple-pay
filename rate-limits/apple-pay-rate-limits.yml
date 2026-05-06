@@ -4,97 +4,53 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Apple Pay
 providerId: apple-pay
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - Apple
-  - Contactless Payments
-  - Digital Wallet
-  - E-Commerce
-  - Mobile Payments
-  - Payments
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Apple Pay API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  - Payments
+  - Apple
+description: Apple does not publish numeric rate limits for the Apple Pay merchant validation endpoint
+  (apple-pay-gateway.apple.com), the Apple Pay JS / ApplePaySession surface, or PassKit native APIs. Throughput
+  is bounded in practice by the merchant's payment-processor capacity (Stripe, Adyen, Braintree, etc.)
+  and Apple's anti-abuse fairness throttling. Apple may apply dynamic throttling on suspicious patterns
+  and signals 429/503 in those cases.
+notes: No public rate-limit documentation exists; downstream processor limits dominate.
+sources:
+  - https://developer.apple.com/documentation/apple_pay_on_the_web
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Apple Pay JS API
-      - PassKit Framework (Apple Pay)
-      - Apple Pay Payment Token API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Apple Pay JS API
-      - PassKit Framework (Apple Pay)
-      - Apple Pay Payment Token API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Apple Pay JS API
-      - PassKit Framework (Apple Pay)
-      - Apple Pay Payment Token API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Apple Pay JS API
-      - PassKit Framework (Apple Pay)
-      - Apple Pay Payment Token API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Apple Pay JS API
-      - PassKit Framework (Apple Pay)
-      - Apple Pay Payment Token API
+  - name: Merchant validation endpoint
+    scope: merchant-id
+    metric: varies
+    limit: not publicly documented
+    notes: Calls to apple-pay-gateway.apple.com for merchant session creation are subject to Apple's anti-abuse
+      fairness controls.
+  - name: ApplePaySession (client)
+    scope: device
+    metric: varies
+    limit: bounded by user interaction
+    notes: ApplePaySession is user-initiated; server-side throughput is bounded by the merchant's checkout
+      volume and payment-processor capacity.
+  - name: PassKit
+    scope: device
+    metric: varies
+    limit: bounded by device
 policies:
   - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+    description: Implement exponential backoff with jitter on merchant-validation 429/503 responses; surface
+      a generic 'try again' state to the buyer to avoid duplicate session creation.
+  - name: Processor Coordination
+    description: Apple Pay tokens are exchanged with the merchant's payment processor (Stripe, Adyen,
+      Braintree, etc.) — that processor's rate limits and idempotency keys govern downstream charge attempts.
+  - name: Sandbox Testing
+    description: Use Apple Pay sandbox tester accounts and processor sandbox endpoints for load and edge-case
+      testing rather than touching production endpoints.
+  - name: Anti-abuse Detection
+    description: Apple may dynamically throttle suspicious merchant validation patterns; ensure server-to-server
+      merchant identity calls are signed correctly and not retried in tight loops.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
