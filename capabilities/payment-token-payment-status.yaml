@@ -1,0 +1,67 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apple Pay Payment Token API — Payment Status
+  description: 'Apple Pay Payment Token API — Payment Status. 1 operations. Lead operation: Apple Pay Get payment transaction
+    status. Self-contained Naftiko capability covering one Apple Pay business surface.'
+  tags:
+  - Apple Pay
+  - Payment Status
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APPLE_PAY_API_KEY: APPLE_PAY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: payment-token-payment-status
+    baseUri: https://{merchantServer}
+    description: Apple Pay Payment Token API — Payment Status business capability. Self-contained, no shared references.
+    resources:
+    - name: payments-apple-pay-transactionId
+      path: /payments/apple-pay/{transactionId}
+      operations:
+      - name: getpaymentstatus
+        method: GET
+        description: Apple Pay Get payment transaction status
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: payment-token-payment-status-rest
+    port: 8080
+    description: REST adapter for Apple Pay Payment Token API — Payment Status. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/payments/apple-pay/{transactionid}
+      name: payments-apple-pay-transactionid
+      description: REST surface for payments-apple-pay-transactionId.
+      operations:
+      - method: GET
+        name: getpaymentstatus
+        description: Apple Pay Get payment transaction status
+        call: payment-token-payment-status.getpaymentstatus
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: payment-token-payment-status-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apple Pay Payment Token API — Payment Status. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: apple-pay-get-payment-transaction
+      description: Apple Pay Get payment transaction status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: payment-token-payment-status.getpaymentstatus
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,77 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Apple Pay JS API — Merchant Validation
+  description: 'Apple Pay JS API — Merchant Validation. 1 operations. Lead operation: Request an Apple Pay payment session.
+    Self-contained Naftiko capability covering one Apple Pay business surface.'
+  tags:
+  - Apple Pay
+  - Merchant Validation
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    APPLE_PAY_API_KEY: APPLE_PAY_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: js-merchant-validation
+    baseUri: https://apple-pay-gateway.apple.com/paymentservices
+    description: Apple Pay JS API — Merchant Validation business capability. Self-contained, no shared references.
+    resources:
+    - name: paymentSession
+      path: /paymentSession
+      operations:
+      - name: requestpaymentsession
+        method: POST
+        description: Request an Apple Pay payment session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: js-merchant-validation-rest
+    port: 8080
+    description: REST adapter for Apple Pay JS API — Merchant Validation. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/paymentsession
+      name: paymentsession
+      description: REST surface for paymentSession.
+      operations:
+      - method: POST
+        name: requestpaymentsession
+        description: Request an Apple Pay payment session
+        call: js-merchant-validation.requestpaymentsession
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: js-merchant-validation-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Apple Pay JS API — Merchant Validation. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: request-apple-pay-payment-session
+      description: Request an Apple Pay payment session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: js-merchant-validation.requestpaymentsession
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
