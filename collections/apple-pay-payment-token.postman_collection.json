@@ -1,0 +1,498 @@
+{
+  "item": [
+    {
+      "id": "37edf09b-4758-4b7e-920e-dee124c80eeb",
+      "name": "Payment Processing",
+      "description": {
+        "content": "Endpoints for receiving and processing Apple Pay payment tokens",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6403c437-9cf6-4bf5-8fec-80c3c8796f29",
+          "name": "Process an Apple Pay payment",
+          "request": {
+            "name": "Process an Apple Pay payment",
+            "description": {
+              "content": "Receives an Apple Pay payment token from the client application, decrypts the payment data using the merchant's payment processing certificate, and submits the payment credentials to the payment processor or acquiring bank for authorization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                "apple-pay"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "The merchant's payment processing server hostname",
+                  "type": "any",
+                  "value": "{{merchantServer}}",
+                  "key": "merchantServer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": {\n    \"paymentData\": {\n      \"data\": \"<string>\",\n      \"signature\": \"<string>\",\n      \"header\": {\n        \"applicationData\": \"<string>\",\n        \"ephemeralPublicKey\": \"<string>\",\n        \"wrappedKey\": \"<string>\",\n        \"publicKeyHash\": \"<string>\",\n        \"transactionId\": \"<string>\"\n      },\n      \"version\": \"<string>\"\n    },\n    \"paymentMethod\": {\n      \"displayName\": \"<string>\",\n      \"network\": \"<string>\",\n      \"type\": \"<string>\",\n      \"paymentPass\": {\n        \"primaryAccountIdentifier\": \"<string>\",\n        \"primaryAccountNumberSuffix\": \"<string>\",\n        \"deviceAccountIdentifier\": \"<string>\",\n        \"deviceAccountNumberSuffix\": \"<string>\"\n      }\n    },\n    \"transactionIdentifier\": \"<string>\"\n  },\n  \"billingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  },\n  \"shippingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0cdcec4b-c1eb-429f-b2cb-7a9213f1e7ff",
+              "name": "Payment processed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "apple-pay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The merchant's payment processing server hostname",
+                      "type": "any",
+                      "value": "{{merchantServer}}",
+                      "key": "merchantServer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": {\n    \"paymentData\": {\n      \"data\": \"string\",\n      \"signature\": \"string\",\n      \"header\": {\n        \"applicationData\": \"string\",\n        \"ephemeralPublicKey\": \"string\",\n        \"wrappedKey\": \"string\",\n        \"publicKeyHash\": \"string\",\n        \"transactionId\": \"string\"\n      },\n      \"version\": \"EC_v1\"\n    },\n    \"paymentMethod\": {\n      \"displayName\": \"string\",\n      \"network\": \"Eftpos\",\n      \"type\": \"store\",\n      \"paymentPass\": {\n        \"primaryAccountIdentifier\": \"string\",\n        \"primaryAccountNumberSuffix\": \"string\",\n        \"deviceAccountIdentifier\": \"string\",\n        \"deviceAccountNumberSuffix\": \"string\"\n      }\n    },\n    \"transactionIdentifier\": \"string\"\n  },\n  \"billingContact\": {\n    \"phoneNumber\": \"string\",\n    \"emailAddress\": \"kzZ7xYzA@qauxaAhsSTDcoyXFdIaOckiFdqbjfYEjQ.pq\",\n    \"givenName\": \"string\",\n    \"familyName\": \"string\",\n    \"phoneticGivenName\": \"string\",\n    \"phoneticFamilyName\": \"string\",\n    \"addressLines\": [\n      \"string\",\n      \"string\"\n    ],\n    \"subLocality\": \"string\",\n    \"locality\": \"string\",\n    \"postalCode\": \"string\",\n    \"subAdministrativeArea\": \"string\",\n    \"administrativeArea\": \"string\",\n    \"country\": \"string\",\n    \"countryCode\": \"string\"\n  },\n  \"shippingContact\": {\n    \"phoneNumber\": \"string\",\n    \"emailAddress\": \"I6PRZNi0pz@XkXXmHV.zq\",\n    \"givenName\": \"string\",\n    \"familyName\": \"string\",\n    \"phoneticGivenName\": \"string\",\n    \"phoneticFamilyName\": \"string\",\n    \"addressLines\": [\n      \"string\",\n      \"string\"\n    ],\n    \"subLocality\": \"string\",\n    \"locality\": \"string\",\n    \"postalCode\": \"string\",\n    \"subAdministrativeArea\": \"string\",\n    \"administrativeArea\": \"string\",\n    \"country\": \"string\",\n    \"countryCode\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"status\": \"pending\",\n  \"authorizationCode\": \"string\",\n  \"amount\": 33.283429464794345,\n  \"currency\": \"string\",\n  \"processedAt\": \"1953-10-04T21:25:28.527Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e08792f1-bf81-4ea1-9939-240327bef950",
+              "name": "Invalid payment token or request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "apple-pay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The merchant's payment processing server hostname",
+                      "type": "any",
+                      "value": "{{merchantServer}}",
+                      "key": "merchantServer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": {\n    \"paymentData\": {\n      \"data\": \"string\",\n      \"signature\": \"string\",\n      \"header\": {\n        \"applicationData\": \"string\",\n        \"ephemeralPublicKey\": \"string\",\n        \"wrappedKey\": \"string\",\n        \"publicKeyHash\": \"string\",\n        \"transactionId\": \"string\"\n      },\n      \"version\": \"EC_v1\"\n    },\n    \"paymentMethod\": {\n      \"displayName\": \"string\",\n      \"network\": \"Eftpos\",\n      \"type\": \"store\",\n      \"paymentPass\": {\n        \"primaryAccountIdentifier\": \"string\",\n        \"primaryAccountNumberSuffix\": \"string\",\n        \"deviceAccountIdentifier\": \"string\",\n        \"deviceAccountNumberSuffix\": \"string\"\n      }\n    },\n    \"transactionIdentifier\": \"string\"\n  },\n  \"billingContact\": {\n    \"phoneNumber\": \"string\",\n    \"emailAddress\": \"kzZ7xYzA@qauxaAhsSTDcoyXFdIaOckiFdqbjfYEjQ.pq\",\n    \"givenName\": \"string\",\n    \"familyName\": \"string\",\n    \"phoneticGivenName\": \"string\",\n    \"phoneticFamilyName\": \"string\",\n    \"addressLines\": [\n      \"string\",\n      \"string\"\n    ],\n    \"subLocality\": \"string\",\n    \"locality\": \"string\",\n    \"postalCode\": \"string\",\n    \"subAdministrativeArea\": \"string\",\n    \"administrativeArea\": \"string\",\n    \"country\": \"string\",\n    \"countryCode\": \"string\"\n  },\n  \"shippingContact\": {\n    \"phoneNumber\": \"string\",\n    \"emailAddress\": \"I6PRZNi0pz@XkXXmHV.zq\",\n    \"givenName\": \"string\",\n    \"familyName\": \"string\",\n    \"phoneticGivenName\": \"string\",\n    \"phoneticFamilyName\": \"string\",\n    \"addressLines\": [\n      \"string\",\n      \"string\"\n    ],\n    \"subLocality\": \"string\",\n    \"locality\": \"string\",\n    \"postalCode\": \"string\",\n    \"subAdministrativeArea\": \"string\",\n    \"administrativeArea\": \"string\",\n    \"country\": \"string\",\n    \"countryCode\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d0a53767-0d5a-4567-8a35-ff31eaae0c40",
+              "name": "Authentication required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "apple-pay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The merchant's payment processing server hostname",
+                      "type": "any",
+                      "value": "{{merchantServer}}",
+                      "key": "merchantServer"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": {\n    \"paymentData\": {\n      \"data\": \"string\",\n      \"signature\": \"string\",\n      \"header\": {\n        \"applicationData\": \"string\",\n        \"ephemeralPublicKey\": \"string\",\n        \"wrappedKey\": \"string\",\n        \"publicKeyHash\": \"string\",\n        \"transactionId\": \"string\"\n      },\n      \"version\": \"EC_v1\"\n    },\n    \"paymentMethod\": {\n      \"displayName\": \"string\",\n      \"network\": \"Eftpos\",\n      \"type\": \"store\",\n      \"paymentPass\": {\n        \"primaryAccountIdentifier\": \"string\",\n        \"primaryAccountNumberSuffix\": \"string\",\n        \"deviceAccountIdentifier\": \"string\",\n        \"deviceAccountNumberSuffix\": \"string\"\n      }\n    },\n    \"transactionIdentifier\": \"string\"\n  },\n  \"billingContact\": {\n    \"phoneNumber\": \"string\",\n    \"emailAddress\": \"kzZ7xYzA@qauxaAhsSTDcoyXFdIaOckiFdqbjfYEjQ.pq\",\n    \"givenName\": \"string\",\n    \"familyName\": \"string\",\n    \"phoneticGivenName\": \"string\",\n    \"phoneticFamilyName\": \"string\",\n    \"addressLines\": [\n      \"string\",\n      \"string\"\n    ],\n    \"subLocality\": \"string\",\n    \"locality\": \"string\",\n    \"postalCode\": \"string\",\n    \"subAdministrativeArea\": \"string\",\n    \"administrativeArea\": \"string\",\n    \"country\": \"string\",\n    \"countryCode\": \"string\"\n  },\n  \"shippingContact\": {\n    \"phoneNumber\": \"string\",\n    \"emailAddress\": \"I6PRZNi0pz@XkXXmHV.zq\",\n    \"givenName\": \"string\",\n    \"familyName\": \"string\",\n    \"phoneticGivenName\": \"string\",\n    \"phoneticFamilyName\": \"string\",\n    \"addressLines\": [\n      \"string\",\n      \"string\"\n    ],\n    \"subLocality\": \"string\",\n    \"locality\": \"string\",\n    \"postalCode\": \"string\",\n    \"subAdministrativeArea\": \"string\",\n    \"administrativeArea\": \"string\",\n    \"country\": \"string\",\n    \"countryCode\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "68cc6c14-ae54-4528-8eec-f088d4d1dd00",
+              "name": "Payment declined or could not be processed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "apple-pay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The merchant's payment processing server hostname",
+                      "type": "any",
+                      "value": "{{merchantServer}}",
+                      "key": "merchantServer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": {\n    \"paymentData\": {\n      \"data\": \"string\",\n      \"signature\": \"string\",\n      \"header\": {\n        \"applicationData\": \"string\",\n        \"ephemeralPublicKey\": \"string\",\n        \"wrappedKey\": \"string\",\n        \"publicKeyHash\": \"string\",\n        \"transactionId\": \"string\"\n      },\n      \"version\": \"EC_v1\"\n    },\n    \"paymentMethod\": {\n      \"displayName\": \"string\",\n      \"network\": \"Eftpos\",\n      \"type\": \"store\",\n      \"paymentPass\": {\n        \"primaryAccountIdentifier\": \"string\",\n        \"primaryAccountNumberSuffix\": \"string\",\n        \"deviceAccountIdentifier\": \"string\",\n        \"deviceAccountNumberSuffix\": \"string\"\n      }\n    },\n    \"transactionIdentifier\": \"string\"\n  },\n  \"billingContact\": {\n    \"phoneNumber\": \"string\",\n    \"emailAddress\": \"kzZ7xYzA@qauxaAhsSTDcoyXFdIaOckiFdqbjfYEjQ.pq\",\n    \"givenName\": \"string\",\n    \"familyName\": \"string\",\n    \"phoneticGivenName\": \"string\",\n    \"phoneticFamilyName\": \"string\",\n    \"addressLines\": [\n      \"string\",\n      \"string\"\n    ],\n    \"subLocality\": \"string\",\n    \"locality\": \"string\",\n    \"postalCode\": \"string\",\n    \"subAdministrativeArea\": \"string\",\n    \"administrativeArea\": \"string\",\n    \"country\": \"string\",\n    \"countryCode\": \"string\"\n  },\n  \"shippingContact\": {\n    \"phoneNumber\": \"string\",\n    \"emailAddress\": \"I6PRZNi0pz@XkXXmHV.zq\",\n    \"givenName\": \"string\",\n    \"familyName\": \"string\",\n    \"phoneticGivenName\": \"string\",\n    \"phoneticFamilyName\": \"string\",\n    \"addressLines\": [\n      \"string\",\n      \"string\"\n    ],\n    \"subLocality\": \"string\",\n    \"locality\": \"string\",\n    \"postalCode\": \"string\",\n    \"subAdministrativeArea\": \"string\",\n    \"administrativeArea\": \"string\",\n    \"country\": \"string\",\n    \"countryCode\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"string\",\n  \"message\": \"string\",\n  \"details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ac84d5f-fcfd-4d43-b652-9a680c9f4c49",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "apple-pay"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "The merchant's payment processing server hostname",
+                      "type": "any",
+                      "value": "{{merchantServer}}",
+                      "key": "merchantServer"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": {\n    \"paymentData\": {\n      \"data\": \"string\",\n      \"signature\": \"string\",\n      \"header\": {\n        \"applicationData\": \"string\",\n        \"ephemeralPublicKey\": \"string\",\n        \"wrappedKey\": \"string\",\n        \"publicKeyHash\": \"string\",\n        \"transactionId\": \"string\"\n      },\n      \"version\": \"EC_v1\"\n    },\n    \"paymentMethod\": {\n      \"displayName\": \"string\",\n      \"network\": \"Eftpos\",\n      \"type\": \"store\",\n      \"paymentPass\": {\n        \"primaryAccountIdentifier\": \"string\",\n        \"primaryAccountNumberSuffix\": \"string\",\n        \"deviceAccountIdentifier\": \"string\",\n        \"deviceAccountNumberSuffix\": \"string\"\n      }\n    },\n    \"transactionIdentifier\": \"string\"\n  },\n  \"billingContact\": {\n    \"phoneNumber\": \"string\",\n    \"emailAddress\": \"kzZ7xYzA@qauxaAhsSTDcoyXFdIaOckiFdqbjfYEjQ.pq\",\n    \"givenName\": \"string\",\n    \"familyName\": \"string\",\n    \"phoneticGivenName\": \"string\",\n    \"phoneticFamilyName\": \"string\",\n    \"addressLines\": [\n      \"string\",\n      \"string\"\n    ],\n    \"subLocality\": \"string\",\n    \"locality\": \"string\",\n    \"postalCode\": \"string\",\n    \"subAdministrativeArea\": \"string\",\n    \"administrativeArea\": \"string\",\n    \"country\": \"string\",\n    \"countryCode\": \"string\"\n  },\n  \"shippingContact\": {\n    \"phoneNumber\": \"string\",\n    \"emailAddress\": \"I6PRZNi0pz@XkXXmHV.zq\",\n    \"givenName\": \"string\",\n    \"familyName\": \"string\",\n    \"phoneticGivenName\": \"string\",\n    \"phoneticFamilyName\": \"string\",\n    \"addressLines\": [\n      \"string\",\n      \"string\"\n    ],\n    \"subLocality\": \"string\",\n    \"locality\": \"string\",\n    \"postalCode\": \"string\",\n    \"subAdministrativeArea\": \"string\",\n    \"administrativeArea\": \"string\",\n    \"country\": \"string\",\n    \"countryCode\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "59890efa-1c64-4d4a-b467-ba8efa96332c",
+      "name": "Payment Status",
+      "description": {
+        "content": "Endpoints for checking payment transaction status",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eabcd830-983b-4c7d-adb1-d92f5243afdd",
+          "name": "Apple Pay Get payment transaction status",
+          "request": {
+            "name": "Apple Pay Get payment transaction status",
+            "description": {
+              "content": "Retrieves the status of a previously submitted Apple Pay payment transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                "apple-pay",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Unique transaction identifier returned from payment processing"
+                },
+                {
+                  "description": "The merchant's payment processing server hostname",
+                  "type": "any",
+                  "value": "{{merchantServer}}",
+                  "key": "merchantServer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af792e6b-6ac1-427e-8e8e-d717616cdba4",
+              "name": "Transaction status retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "apple-pay",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Unique transaction identifier returned from payment processing"
+                    },
+                    {
+                      "description": "The merchant's payment processing server hostname",
+                      "type": "any",
+                      "value": "{{merchantServer}}",
+                      "key": "merchantServer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"status\": \"pending\",\n  \"authorizationCode\": \"string\",\n  \"amount\": 33.283429464794345,\n  \"currency\": \"string\",\n  \"processedAt\": \"1953-10-04T21:25:28.527Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87ae117f-62f0-479f-9ded-878d0d397753",
+              "name": "Transaction not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "apple-pay",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Unique transaction identifier returned from payment processing"
+                    },
+                    {
+                      "description": "The merchant's payment processing server hostname",
+                      "type": "any",
+                      "value": "{{merchantServer}}",
+                      "key": "merchantServer"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "The merchant's payment processing server hostname",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "api.example.com",
+      "key": "merchantServer"
+    },
+    {
+      "type": "string",
+      "value": "https://{{merchantServer}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "89fb4dc1-cfb9-4076-bf8f-d02af98b46f6",
+    "name": "Apple Pay Payment Token API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Server-side specification for processing Apple Pay payment tokens. When a customer authorizes an Apple Pay payment, the client application receives an encrypted payment token containing the payment credential. The merchant server or payment service provider must decrypt and process this token to complete the transaction. This specification documents the payment token structure and the merchant server endpoints for receiving and processing payment tokens.\n\nContact Support:\n Name: Apple Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

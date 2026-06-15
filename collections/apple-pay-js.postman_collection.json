@@ -1,0 +1,694 @@
+{
+  "item": [
+    {
+      "id": "0691fc37-bdfc-462a-bbf7-b6341adf47de",
+      "name": "Merchant Registration",
+      "description": {
+        "content": "Register and manage merchant domains for Apple Pay on the Web",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e7e99597-78d0-4113-ba3b-ece9a4dd3028",
+          "name": "Register a merchant for Apple Pay on the Web",
+          "request": {
+            "name": "Register a merchant for Apple Pay on the Web",
+            "description": {
+              "content": "Registers a merchant domain for Apple Pay on the Web. The merchant must host a domain verification file at /.well-known/apple-developer-merchantid-domain-association before calling this endpoint.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "registerMerchant"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantIdentifier\": \"<string>\",\n  \"domainNames\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9b5cff7c-753e-4388-b59e-f5cda98d380b",
+              "name": "Merchant domain registered successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registerMerchant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantIdentifier\": \"<string>\",\n  \"domainNames\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"string\",\n  \"merchantIdentifier\": \"string\",\n  \"registeredDomains\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b4949a2-68e6-41b9-b264-877f5a5ac203",
+              "name": "Invalid request or domain verification failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registerMerchant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantIdentifier\": \"<string>\",\n  \"domainNames\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": \"string\",\n  \"statusMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a68ddc70-cfe2-4c67-8a16-6e876b9f5f9c",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registerMerchant"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantIdentifier\": \"<string>\",\n  \"domainNames\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a6f6bf2-2a6b-4bed-adcb-2afbd064a56f",
+          "name": "Apple Pay List registered merchant domains",
+          "request": {
+            "name": "Apple Pay List registered merchant domains",
+            "description": {
+              "content": "Returns a list of domains that have been registered for Apple Pay on the Web for the authenticated merchant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "domains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantIdentifier",
+                  "value": "<string>",
+                  "description": "(Required) The merchant identifier issued by Apple"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d7af4338-0eab-4f85-9587-c2dc0d1f28c4",
+              "name": "List of registered domains",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantIdentifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"merchantIdentifier\": \"string\",\n  \"domainNames\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1e3b7d1-70ee-4159-bacb-80daa47a7c6b",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantIdentifier",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "19f02cfd-6c54-436d-a619-2b91aae5213c",
+          "name": "Apple Pay Remove a registered merchant domain",
+          "request": {
+            "name": "Apple Pay Remove a registered merchant domain",
+            "description": {
+              "content": "Removes a previously registered domain from the merchant's Apple Pay on the Web configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "domains"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "merchantIdentifier",
+                  "value": "<string>",
+                  "description": "(Required) The merchant identifier issued by Apple"
+                },
+                {
+                  "disabled": false,
+                  "key": "domainName",
+                  "value": "<string>",
+                  "description": "(Required) The domain name to remove"
+                }
+              ],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "06d1dfbb-1c46-4a8c-af49-c06d5ab8b1a9",
+              "name": "Domain removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantIdentifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "41504a3d-b48e-4e6f-8800-3121fb4676d4",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantIdentifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "77bb7be0-26b1-4228-922a-53010e4c95fd",
+              "name": "Domain not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "domains"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "merchantIdentifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "domainName",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "06d8c9c9-f917-49ee-8027-43bda98b6715",
+      "name": "Merchant Validation",
+      "description": {
+        "content": "Validate merchant identity and obtain payment sessions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "515c48ed-0dbc-4e87-80d3-cd868590c55f",
+          "name": "Request an Apple Pay payment session",
+          "request": {
+            "name": "Request an Apple Pay payment session",
+            "description": {
+              "content": "Validates the merchant and returns an opaque payment session object. The merchant server calls this endpoint when the client-side ApplePaySession triggers the onvalidatemerchant event. The response must be passed back to the client via session.completeMerchantValidation(). Requires mutual TLS authentication using the merchant identity certificate.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "paymentSession"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantIdentifier\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"initiative\": \"<string>\",\n  \"initiativeContext\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4255e767-4411-425b-8c53-112fce24d95c",
+              "name": "Payment session created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentSession"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantIdentifier\": \"merchant.com.example.mystore\",\n  \"displayName\": \"My Store\",\n  \"initiative\": \"web\",\n  \"initiativeContext\": \"mystore.example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"epochTimestamp\": 4294,\n  \"expiresAt\": 4433,\n  \"merchantSessionIdentifier\": \"string\",\n  \"nonce\": \"string\",\n  \"merchantIdentifier\": \"string\",\n  \"domainName\": \"string\",\n  \"displayName\": \"string\",\n  \"signature\": \"string\",\n  \"operationalAnalyticsIdentifier\": \"string\",\n  \"retries\": 6686,\n  \"pspId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d5839d8-e8e5-4709-88f1-4d40f47d8332",
+              "name": "Invalid request parameters",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentSession"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantIdentifier\": \"merchant.com.example.mystore\",\n  \"displayName\": \"My Store\",\n  \"initiative\": \"web\",\n  \"initiativeContext\": \"mystore.example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"statusCode\": \"string\",\n  \"statusMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbf6b7cd-ee37-4f36-926d-de9b7d0cfc6e",
+              "name": "Merchant certificate authentication failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentSession"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantIdentifier\": \"merchant.com.example.mystore\",\n  \"displayName\": \"My Store\",\n  \"initiative\": \"web\",\n  \"initiativeContext\": \"mystore.example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8443e394-662e-412f-b501-7cb70d88f99f",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "paymentSession"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantIdentifier\": \"merchant.com.example.mystore\",\n  \"displayName\": \"My Store\",\n  \"initiative\": \"web\",\n  \"initiativeContext\": \"mystore.example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apple-pay-gateway.apple.com/paymentservices",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3ddf80bc-3549-42db-bb22-a3260f8042e1",
+    "name": "Apple Pay JS API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Server-side REST API used in conjunction with the Apple Pay JS client-side JavaScript API for processing Apple Pay payments on the web. Merchants call Apple's payment gateway to validate their merchant identity and obtain a payment session, which is then used by the client-side ApplePaySession to authorize payments via Touch ID or Face ID in Safari.\n\nContact Support:\n Name: Apple Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

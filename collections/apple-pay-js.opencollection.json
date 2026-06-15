@@ -1,0 +1,100 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apple Pay JS API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Merchant Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request an Apple Pay payment session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apple-pay-gateway.apple.com/paymentservices/paymentSession",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates the merchant and returns an opaque payment session object. The merchant server calls this endpoint when the client-side ApplePaySession triggers the onvalidatemerchant event. The response must be passed back to the client via session.completeMerchantValidation(). Requires mutual TLS authentication using the merchant identity certificate."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Merchant Registration",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register a merchant for Apple Pay on the Web",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apple-pay-gateway.apple.com/paymentservices/registerMerchant",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a merchant domain for Apple Pay on the Web. The merchant must host a domain verification file at /.well-known/apple-developer-merchantid-domain-association before calling this endpoint."
+        },
+        {
+          "info": {
+            "name": "Apple Pay List registered merchant domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://apple-pay-gateway.apple.com/paymentservices/domains",
+            "params": [
+              {
+                "name": "merchantIdentifier",
+                "value": "",
+                "type": "query",
+                "description": "The merchant identifier issued by Apple"
+              }
+            ]
+          },
+          "docs": "Returns a list of domains that have been registered for Apple Pay on the Web for the authenticated merchant."
+        },
+        {
+          "info": {
+            "name": "Apple Pay Remove a registered merchant domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://apple-pay-gateway.apple.com/paymentservices/domains",
+            "params": [
+              {
+                "name": "merchantIdentifier",
+                "value": "",
+                "type": "query",
+                "description": "The merchant identifier issued by Apple"
+              },
+              {
+                "name": "domainName",
+                "value": "",
+                "type": "query",
+                "description": "The domain name to remove"
+              }
+            ]
+          },
+          "docs": "Removes a previously registered domain from the merchant's Apple Pay on the Web configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

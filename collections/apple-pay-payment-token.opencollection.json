@@ -1,0 +1,60 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apple Pay Payment Token API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Processing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Process an Apple Pay payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{merchantServer}/payments/apple-pay",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Receives an Apple Pay payment token from the client application, decrypts the payment data using the merchant's payment processing certificate, and submits the payment credentials to the payment processor or acquiring bank for authorization."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment Status",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Apple Pay Get payment transaction status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{merchantServer}/payments/apple-pay/:transactionId",
+            "params": [
+              {
+                "name": "transactionId",
+                "value": "",
+                "type": "path",
+                "description": "Unique transaction identifier returned from payment processing"
+              }
+            ]
+          },
+          "docs": "Retrieves the status of a previously submitted Apple Pay payment transaction."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
