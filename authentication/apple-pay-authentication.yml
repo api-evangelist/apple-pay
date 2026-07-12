@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/apple-pay-js-openapi.yml
+summary:
+  types:
+  - mutualTLS
+schemes:
+- name: merchantCertificate
+  type: mutualTLS
+  description: Mutual TLS authentication using the Apple Pay Merchant Identity Certificate.
+    The certificate is obtained from the Apple Developer portal and must be associated with
+    the merchant identifier.
+  sources:
+  - openapi/apple-pay-js-openapi.yml

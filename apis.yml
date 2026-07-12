@@ -93,6 +93,12 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: VulnerabilityDisclosure
+    url: security/apple-pay-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/apple-pay-domain-security.yml
+  - type: Authentication
+    url: authentication/apple-pay-authentication.yml
   - type: Portal
     url: https://developer.apple.com/account/
   - type: Support
