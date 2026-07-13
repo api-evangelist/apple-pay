@@ -1,6 +1,22 @@
+# apple-pay — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 2/2 servers on apple.com
+#   - operationid-casing: camel @ 100% (n=6)
+#   - schema-names-casing: pascal @ 100% (n=15)
+#   - schema-properties-casing: camel @ 73% (n=74)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: ErrorResponse
+#   - operation-documents-401: 83% adherence
+#   - merge: kept 24 existing, added 5 measured, upgraded 0
+#   - added: servers-expected-domain, operationid-casing, schema-names-casing, schema-properties-casing, error-schema-defined
+extends:
+  - spectral:oas
 rules:
-
-  # INFO / METADATA
   info-title-apple-prefix:
     description: API title should start with "Apple Pay"
     severity: warn
@@ -9,8 +25,7 @@ rules:
       field: title
       function: pattern
       functionOptions:
-        match: "^Apple Pay"
-
+        match: ^Apple Pay
   info-version-required:
     description: API version must be specified
     severity: error
@@ -18,7 +33,6 @@ rules:
     then:
       field: version
       function: truthy
-
   info-description-required:
     description: API description must be present
     severity: warn
@@ -28,7 +42,6 @@ rules:
       function: minLength
       functionOptions:
         min: 20
-
   info-contact-required:
     description: Contact information should be provided
     severity: info
@@ -36,7 +49,6 @@ rules:
     then:
       field: contact
       function: truthy
-
   info-terms-of-service:
     description: Terms of service URL should be provided for payment APIs
     severity: warn
@@ -44,8 +56,6 @@ rules:
     then:
       field: termsOfService
       function: truthy
-
-  # SERVERS
   servers-required:
     description: At least one server must be defined
     severity: error
@@ -53,7 +63,6 @@ rules:
     then:
       field: servers
       function: truthy
-
   servers-https:
     description: Server URLs must use HTTPS for payment APIs
     severity: error
@@ -62,8 +71,7 @@ rules:
       field: url
       function: pattern
       functionOptions:
-        match: "^https://"
-
+        match: ^https://
   servers-description-required:
     description: Each server must have a description distinguishing production from sandbox
     severity: warn
@@ -71,8 +79,6 @@ rules:
     then:
       field: description
       function: truthy
-
-  # SECURITY
   security-defined:
     description: Global security scheme must be defined for payment APIs
     severity: error
@@ -80,7 +86,6 @@ rules:
     then:
       field: security
       function: truthy
-
   security-schemes-defined:
     description: Security schemes must be defined in components
     severity: error
@@ -88,19 +93,15 @@ rules:
     then:
       field: securitySchemes
       function: truthy
-
-  # PATHS — NAMING
   paths-kebab-case:
     description: Path segments must use camelCase or kebab-case
     severity: warn
     given: $.paths
     then:
-      field: "@key"
+      field: '@key'
       function: pattern
       functionOptions:
-        match: "^(/[a-zA-Z0-9{}/_-]+)+$"
-
-  # OPERATIONS
+        match: ^(/[a-zA-Z0-9{}/_-]+)+$
   operation-summary-required:
     description: Every operation must have a summary
     severity: error
@@ -108,7 +109,6 @@ rules:
     then:
       field: summary
       function: truthy
-
   operation-id-required:
     description: Every operation must have an operationId
     severity: error
@@ -116,7 +116,6 @@ rules:
     then:
       field: operationId
       function: truthy
-
   operation-description-required:
     description: Every operation must have a description
     severity: warn
@@ -124,7 +123,6 @@ rules:
     then:
       field: description
       function: truthy
-
   operation-tags-required:
     description: Every operation must have at least one tag
     severity: warn
@@ -132,8 +130,6 @@ rules:
     then:
       field: tags
       function: truthy
-
-  # PARAMETERS
   parameter-description-required:
     description: Every parameter must have a description
     severity: warn
@@ -141,8 +137,6 @@ rules:
     then:
       field: description
       function: truthy
-
-  # RESPONSES
   operation-success-response-required:
     description: Every operation must have a 2xx response
     severity: error
@@ -152,10 +146,12 @@ rules:
       functionOptions:
         schema:
           anyOf:
-            - required: ['200']
-            - required: ['201']
-            - required: ['204']
-
+          - required:
+            - '200'
+          - required:
+            - '201'
+          - required:
+            - '204'
   response-401-for-payment-apis:
     description: Payment APIs must define 401 Unauthorized responses
     severity: warn
@@ -163,7 +159,6 @@ rules:
     then:
       field: '401'
       function: truthy
-
   response-description-required:
     description: Every response must have a description
     severity: error
@@ -171,8 +166,6 @@ rules:
     then:
       field: description
       function: truthy
-
-  # SCHEMAS
   schema-title-required:
     description: Component schemas must have a title
     severity: warn
@@ -180,7 +173,6 @@ rules:
     then:
       field: title
       function: truthy
-
   schema-description-required:
     description: Component schemas should have a description
     severity: warn
@@ -188,8 +180,6 @@ rules:
     then:
       field: description
       function: truthy
-
-  # HTTP METHOD CONVENTIONS
   http-get-no-request-body:
     description: GET operations must not have a request body
     severity: error
@@ -197,8 +187,6 @@ rules:
     then:
       field: requestBody
       function: falsy
-
-  # GENERAL QUALITY
   no-empty-descriptions:
     description: Descriptions must not be empty
     severity: warn
@@ -206,12 +194,52 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: ".+"
-
+        match: .+
   external-docs-encouraged:
     description: External documentation links are encouraged for payment APIs
     severity: info
     given: $
     then:
       field: externalDocs
+      function: truthy
+  servers-expected-domain:
+    description: Server URLs should be on the apple.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: apple\.com
+  operationid-casing:
+    description: Operation IDs should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be camelCase (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: camel
+  error-schema-defined:
+    description: A shared error schema (ErrorResponse) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: ErrorResponse
       function: truthy
