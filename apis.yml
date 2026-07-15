@@ -93,6 +93,8 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/apple-pay-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/apple-pay-vulnerability-disclosure.yml
   - type: DomainSecurity
