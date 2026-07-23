@@ -1,0 +1,84 @@
+openapi: 3.1.0
+info:
+  title: Apple Pay JS Merchant Registration Payment Status API
+  description: Server-side REST API used in conjunction with the Apple Pay JS client-side JavaScript API for processing Apple Pay payments on the web. Merchants call Apple's payment gateway to validate their merchant identity and obtain a payment session, which is then used by the client-side ApplePaySession to authorize payments via Touch ID or Face ID in Safari.
+  version: '1.0'
+  contact:
+    name: Apple Developer Support
+    url: https://developer.apple.com/support/apple-pay/
+  termsOfService: https://developer.apple.com/apple-pay/acceptable-use-guidelines/
+servers:
+- url: https://apple-pay-gateway.apple.com/paymentservices
+  description: Apple Pay Production Gateway
+- url: https://apple-pay-gateway-nc-pod5.apple.com/paymentservices
+  description: Apple Pay Sandbox Gateway
+security:
+- merchantCertificate: []
+tags:
+- name: Payment Status
+  description: Endpoints for checking payment transaction status
+paths:
+  /payments/apple-pay/{transactionId}:
+    get:
+      operationId: getPaymentStatus
+      summary: Apple Pay Get payment transaction status
+      description: Retrieves the status of a previously submitted Apple Pay payment transaction.
+      tags:
+      - Payment Status
+      parameters:
+      - $ref: '#/components/parameters/transactionId'
+      responses:
+        '200':
+          description: Transaction status retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentResult'
+        '404':
+          description: Transaction not found
+components:
+  schemas:
+    PaymentResult:
+      type: object
+      description: Result of payment processing
+      properties:
+        transactionId:
+          type: string
+          description: Unique transaction identifier
+        status:
+          type: string
+          enum:
+          - authorized
+          - captured
+          - declined
+          - error
+          - pending
+          description: Payment transaction status
+        authorizationCode:
+          type: string
+          description: Authorization code from the payment processor
+        amount:
+          type: number
+          description: Authorized or captured amount
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        processedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the payment was processed
+  parameters:
+    transactionId:
+      name: transactionId
+      in: path
+      required: true
+      description: Unique transaction identifier returned from payment processing
+      schema:
+        type: string
+  securitySchemes:
+    merchantCertificate:
+      type: mutualTLS
+      description: Mutual TLS authentication using the Apple Pay Merchant Identity Certificate. The certificate is obtained from the Apple Developer portal and must be associated with the merchant identifier.
+externalDocs:
+  description: Apple Pay on the Web Documentation
+  url: https://developer.apple.com/documentation/apple_pay_on_the_web
