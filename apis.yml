@@ -4,6 +4,19 @@ description: >-
   Wallet. It supports Touch ID, Face ID, and Apple Watch authentication for both in-person and online payments. Apple
   Pay is available on iOS, watchOS, macOS, and via Safari on the web through the Apple Pay JS API, with a PassKit native
   framework for iOS/watchOS app integration.
+accessModel:
+  pricing: freemium
+  onboarding: approval
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium · Requires approval
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 image: https://developer.apple.com/assets/elements/icons/apple-pay/apple-pay-96x96.png
 created: '2024-01-01'
 modified: '2026-05-19'
@@ -17,82 +30,134 @@ tags:
   - Mobile Payments
   - Payments
 apis:
-  - name: Apple Pay JS API
-    description: >-
-      Server-side REST API for Apple Pay on the Web, enabling merchants to validate their identity with Apple and obtain
-      payment sessions used by the ApplePaySession JavaScript API in Safari. Supports Touch ID and Face ID for
-      frictionless web checkout.
-    image: https://developer.apple.com/assets/elements/icons/apple-pay/apple-pay-96x96.png
-    humanURL: https://developer.apple.com/documentation/apple_pay_on_the_web
-    baseURL: https://apple-pay-gateway.apple.com
-    tags:
-      - Javascript
-      - Safari
-      - Web Payments
-    properties:
-      - type: Documentation
-        url: https://developer.apple.com/documentation/apple_pay_on_the_web
-      - type: GettingStarted
-        url: https://developer.apple.com/apple-pay/implementation/
-      - type: APIReference
-        url: https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentrequest
-      - type: Sandbox
-        url: https://developer.apple.com/apple-pay/sandbox-testing/
-      - type: OpenAPI
-        url: openapi/apple-pay-js-openapi.yml
-      - type: JSONSchema
-        url: json-schema/apple-pay-payment-request-schema.json
-        title: Payment Request Schema
-    contact:
-      - FN: Apple Developer Support
-        email: developer@apple.com
-        url: https://developer.apple.com/contact/
-  - name: PassKit Framework (Apple Pay)
-    description: >-
-      Native iOS, watchOS, and macOS framework for integrating Apple Pay into mobile and desktop applications. Provides
-      PKPaymentRequest and PKPaymentAuthorizationViewController for in-app Apple Pay checkout.
-    image: https://developer.apple.com/assets/elements/icons/apple-pay/apple-pay-96x96.png
-    humanURL: https://developer.apple.com/documentation/passkit
-    baseURL: Native Framework
-    tags:
-      - iOS
-      - Mobile
-      - Native
-      - Swift
-    properties:
-      - type: Documentation
-        url: https://developer.apple.com/documentation/passkit/apple_pay
-      - type: APIReference
-        url: https://developer.apple.com/documentation/passkit/pkpaymentrequest
-      - type: CodeExamples
-        url: https://developer.apple.com/documentation/passkit/apple_pay/offering_apple_pay
-        title: Sample Code
-      - type: YouTube
-        url: https://developer.apple.com/videos/frameworks/wallet-and-apple-pay
-  - name: Apple Pay Payment Token API
-    description: >-
-      Server-side specification for processing and decrypting Apple Pay payment tokens received from client
-      applications. Tokens use EC_v1 or RSA_v1 encryption and contain the payment authorization data for charge
-      processing.
-    image: https://developer.apple.com/assets/elements/icons/apple-pay/apple-pay-96x96.png
-    humanURL: https://developer.apple.com/documentation/passkit/apple_pay/payment_token_format_reference
-    baseURL: Merchant Server
-    tags:
-      - Encryption
-      - Payment Processing
-      - Server-Side
-    properties:
-      - type: Documentation
-        url: https://developer.apple.com/documentation/passkit/apple_pay/payment_token_format_reference
-      - type: OpenAPI
-        url: openapi/apple-pay-payment-token-openapi.yml
-      - type: JSONSchema
-        url: json-schema/apple-pay-payment-token-schema.json
-        title: Payment Token Schema
+- name: PassKit Framework (Apple Pay)
+  description: >-
+    Native iOS, watchOS, and macOS framework for integrating Apple Pay into mobile and desktop applications.
+    Provides PKPaymentRequest and PKPaymentAuthorizationViewController for in-app Apple Pay checkout.
+  image: https://developer.apple.com/assets/elements/icons/apple-pay/apple-pay-96x96.png
+  humanURL: https://developer.apple.com/documentation/passkit
+  baseURL: Native Framework
+  tags:
+  - iOS
+  - Mobile
+  - Native
+  - Swift
+  properties:
+  - type: Documentation
+    url: https://developer.apple.com/documentation/passkit/apple_pay
+  - type: APIReference
+    url: https://developer.apple.com/documentation/passkit/pkpaymentrequest
+  - type: CodeExamples
+    url: https://developer.apple.com/documentation/passkit/apple_pay/offering_apple_pay
+    title: Sample Code
+  - type: YouTube
+    url: https://developer.apple.com/videos/frameworks/wallet-and-apple-pay
+- aid: apple-pay:apple-pay-merchant-registration-api
+  name: Apple Pay Merchant Registration API
+  description: Register and manage merchant domains for Apple Pay on the Web
+  humanURL: https://developer.apple.com/documentation/apple_pay_on_the_web
+  baseURL: https://apple-pay-gateway.apple.com
+  tags:
+  - Merchant Registration
+  properties:
+  - type: OpenAPI
+    url: openapi/apple-pay-merchant-registration-api-openapi.yml
+  - type: Documentation
+    url: https://developer.apple.com/documentation/apple_pay_on_the_web
+  - type: GettingStarted
+    url: https://developer.apple.com/apple-pay/implementation/
+  - type: APIReference
+    url: https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentrequest
+  - type: Sandbox
+    url: https://developer.apple.com/apple-pay/sandbox-testing/
+  - type: JSONSchema
+    url: json-schema/apple-pay-payment-request-schema.json
+  - type: Documentation
+    url: >-
+      https://developer.apple.com/documentation/passkit/apple_pay/payment_token_format_reference
+  - type: JSONSchema
+    url: json-schema/apple-pay-payment-token-schema.json
+- aid: apple-pay:apple-pay-merchant-validation-api
+  name: Apple Pay Merchant Validation API
+  description: Validate merchant identity and obtain payment sessions
+  humanURL: https://developer.apple.com/documentation/apple_pay_on_the_web
+  baseURL: https://apple-pay-gateway.apple.com
+  tags:
+  - Merchant Validation
+  properties:
+  - type: OpenAPI
+    url: openapi/apple-pay-merchant-validation-api-openapi.yml
+  - type: Documentation
+    url: https://developer.apple.com/documentation/apple_pay_on_the_web
+  - type: GettingStarted
+    url: https://developer.apple.com/apple-pay/implementation/
+  - type: APIReference
+    url: https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentrequest
+  - type: Sandbox
+    url: https://developer.apple.com/apple-pay/sandbox-testing/
+  - type: JSONSchema
+    url: json-schema/apple-pay-payment-request-schema.json
+  - type: Documentation
+    url: >-
+      https://developer.apple.com/documentation/passkit/apple_pay/payment_token_format_reference
+  - type: JSONSchema
+    url: json-schema/apple-pay-payment-token-schema.json
+- aid: apple-pay:apple-pay-payment-processing-api
+  name: Apple Pay Payment Processing API
+  description: Endpoints for receiving and processing Apple Pay payment tokens
+  humanURL: https://developer.apple.com/documentation/apple_pay_on_the_web
+  baseURL: https://apple-pay-gateway.apple.com
+  tags:
+  - Payment Processing
+  properties:
+  - type: OpenAPI
+    url: openapi/apple-pay-payment-processing-api-openapi.yml
+  - type: Documentation
+    url: https://developer.apple.com/documentation/apple_pay_on_the_web
+  - type: GettingStarted
+    url: https://developer.apple.com/apple-pay/implementation/
+  - type: APIReference
+    url: https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentrequest
+  - type: Sandbox
+    url: https://developer.apple.com/apple-pay/sandbox-testing/
+  - type: JSONSchema
+    url: json-schema/apple-pay-payment-request-schema.json
+  - type: Documentation
+    url: >-
+      https://developer.apple.com/documentation/passkit/apple_pay/payment_token_format_reference
+  - type: JSONSchema
+    url: json-schema/apple-pay-payment-token-schema.json
+- aid: apple-pay:apple-pay-payment-status-api
+  name: Apple Pay Payment Status API
+  description: Endpoints for checking payment transaction status
+  humanURL: https://developer.apple.com/documentation/apple_pay_on_the_web
+  baseURL: https://apple-pay-gateway.apple.com
+  tags:
+  - Payment Status
+  properties:
+  - type: OpenAPI
+    url: openapi/apple-pay-payment-status-api-openapi.yml
+  - type: Documentation
+    url: https://developer.apple.com/documentation/apple_pay_on_the_web
+  - type: GettingStarted
+    url: https://developer.apple.com/apple-pay/implementation/
+  - type: APIReference
+    url: https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentrequest
+  - type: Sandbox
+    url: https://developer.apple.com/apple-pay/sandbox-testing/
+  - type: JSONSchema
+    url: json-schema/apple-pay-payment-request-schema.json
+  - type: Documentation
+    url: >-
+      https://developer.apple.com/documentation/passkit/apple_pay/payment_token_format_reference
+  - type: JSONSchema
+    url: json-schema/apple-pay-payment-token-schema.json
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/apple-pay/overview
   - type: AgenticAccess
     url: agentic-access/apple-pay-agentic-access.yml
   - type: VulnerabilityDisclosure
