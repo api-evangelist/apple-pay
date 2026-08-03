@@ -1,0 +1,326 @@
+{
+  "info": {
+    "_postman_id": "4a12c581-6ce2-4dc4-95ce-0f67e41f7f81",
+    "name": "Apple Pay JS Merchant Registration Payment Processing API",
+    "description": "Server-side REST API used in conjunction with the Apple Pay JS client-side JavaScript API for processing Apple Pay payments on the web. Merchants call Apple's payment gateway to validate their merchant identity and obtain a payment session, which is then used by the client-side ApplePaySession to authorize payments via Touch ID or Face ID in Safari.\n\nContact Support:\n Name: Apple Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:03:34.000Z",
+    "updatedAt": "2026-07-28T01:03:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4a12c581-6ce2-4dc4-95ce-0f67e41f7f81"
+  },
+  "item": [
+    {
+      "name": "payments",
+      "item": [
+        {
+          "name": "apple-pay",
+          "item": [
+            {
+              "name": "Process an Apple Pay payment",
+              "id": "07a28503-a6f8-4082-94bc-ce633324fa83",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": {\n    \"paymentData\": {\n      \"data\": \"<string>\",\n      \"signature\": \"<string>\",\n      \"header\": {\n        \"applicationData\": \"<string>\",\n        \"ephemeralPublicKey\": \"<string>\",\n        \"wrappedKey\": \"<string>\",\n        \"publicKeyHash\": \"<string>\",\n        \"transactionId\": \"<string>\"\n      },\n      \"version\": \"RSA_v2\"\n    },\n    \"paymentMethod\": {\n      \"displayName\": \"<string>\",\n      \"network\": \"iD\",\n      \"type\": \"credit\",\n      \"paymentPass\": {\n        \"primaryAccountIdentifier\": \"<string>\",\n        \"primaryAccountNumberSuffix\": \"<string>\",\n        \"deviceAccountIdentifier\": \"<string>\",\n        \"deviceAccountNumberSuffix\": \"<string>\"\n      }\n    },\n    \"transactionIdentifier\": \"<string>\"\n  },\n  \"billingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  },\n  \"shippingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/payments/apple-pay",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "payments",
+                    "apple-pay"
+                  ]
+                },
+                "description": "Receives an Apple Pay payment token from the client application, decrypts the payment data using the merchant's payment processing certificate, and submits the payment credentials to the payment processor or acquiring bank for authorization."
+              },
+              "response": [
+                {
+                  "id": "3a839a6c-0bc5-4618-abd6-ef45b9d1fa40",
+                  "name": "Payment processed successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"token\": {\n    \"paymentData\": {\n      \"data\": \"<string>\",\n      \"signature\": \"<string>\",\n      \"header\": {\n        \"applicationData\": \"<string>\",\n        \"ephemeralPublicKey\": \"<string>\",\n        \"wrappedKey\": \"<string>\",\n        \"publicKeyHash\": \"<string>\",\n        \"transactionId\": \"<string>\"\n      },\n      \"version\": \"RSA_v2\"\n    },\n    \"paymentMethod\": {\n      \"displayName\": \"<string>\",\n      \"network\": \"iD\",\n      \"type\": \"credit\",\n      \"paymentPass\": {\n        \"primaryAccountIdentifier\": \"<string>\",\n        \"primaryAccountNumberSuffix\": \"<string>\",\n        \"deviceAccountIdentifier\": \"<string>\",\n        \"deviceAccountNumberSuffix\": \"<string>\"\n      }\n    },\n    \"transactionIdentifier\": \"<string>\"\n  },\n  \"billingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  },\n  \"shippingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payments/apple-pay",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payments",
+                        "apple-pay"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"transactionId\": \"<string>\",\n  \"status\": \"pending\",\n  \"authorizationCode\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"currency\": \"<string>\",\n  \"processedAt\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T01:03:35.000Z",
+                  "updatedAt": "2026-07-28T01:03:35.000Z",
+                  "uid": "35240-3a839a6c-0bc5-4618-abd6-ef45b9d1fa40"
+                },
+                {
+                  "id": "b174f53c-188a-49ef-98cf-a5243337d0a1",
+                  "name": "Invalid payment token or request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"token\": {\n    \"paymentData\": {\n      \"data\": \"<string>\",\n      \"signature\": \"<string>\",\n      \"header\": {\n        \"applicationData\": \"<string>\",\n        \"ephemeralPublicKey\": \"<string>\",\n        \"wrappedKey\": \"<string>\",\n        \"publicKeyHash\": \"<string>\",\n        \"transactionId\": \"<string>\"\n      },\n      \"version\": \"RSA_v2\"\n    },\n    \"paymentMethod\": {\n      \"displayName\": \"<string>\",\n      \"network\": \"iD\",\n      \"type\": \"credit\",\n      \"paymentPass\": {\n        \"primaryAccountIdentifier\": \"<string>\",\n        \"primaryAccountNumberSuffix\": \"<string>\",\n        \"deviceAccountIdentifier\": \"<string>\",\n        \"deviceAccountNumberSuffix\": \"<string>\"\n      }\n    },\n    \"transactionIdentifier\": \"<string>\"\n  },\n  \"billingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  },\n  \"shippingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payments/apple-pay",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payments",
+                        "apple-pay"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:35.000Z",
+                  "updatedAt": "2026-07-28T01:03:35.000Z",
+                  "uid": "35240-b174f53c-188a-49ef-98cf-a5243337d0a1"
+                },
+                {
+                  "id": "f12f3821-fa82-48d3-9a35-bae824edfa8a",
+                  "name": "Authentication required",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"token\": {\n    \"paymentData\": {\n      \"data\": \"<string>\",\n      \"signature\": \"<string>\",\n      \"header\": {\n        \"applicationData\": \"<string>\",\n        \"ephemeralPublicKey\": \"<string>\",\n        \"wrappedKey\": \"<string>\",\n        \"publicKeyHash\": \"<string>\",\n        \"transactionId\": \"<string>\"\n      },\n      \"version\": \"RSA_v2\"\n    },\n    \"paymentMethod\": {\n      \"displayName\": \"<string>\",\n      \"network\": \"iD\",\n      \"type\": \"credit\",\n      \"paymentPass\": {\n        \"primaryAccountIdentifier\": \"<string>\",\n        \"primaryAccountNumberSuffix\": \"<string>\",\n        \"deviceAccountIdentifier\": \"<string>\",\n        \"deviceAccountNumberSuffix\": \"<string>\"\n      }\n    },\n    \"transactionIdentifier\": \"<string>\"\n  },\n  \"billingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  },\n  \"shippingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payments/apple-pay",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payments",
+                        "apple-pay"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:03:35.000Z",
+                  "updatedAt": "2026-07-28T01:03:35.000Z",
+                  "uid": "35240-f12f3821-fa82-48d3-9a35-bae824edfa8a"
+                },
+                {
+                  "id": "89353be0-62da-4a5a-a621-bb8e80275635",
+                  "name": "Payment declined or could not be processed",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"token\": {\n    \"paymentData\": {\n      \"data\": \"<string>\",\n      \"signature\": \"<string>\",\n      \"header\": {\n        \"applicationData\": \"<string>\",\n        \"ephemeralPublicKey\": \"<string>\",\n        \"wrappedKey\": \"<string>\",\n        \"publicKeyHash\": \"<string>\",\n        \"transactionId\": \"<string>\"\n      },\n      \"version\": \"RSA_v2\"\n    },\n    \"paymentMethod\": {\n      \"displayName\": \"<string>\",\n      \"network\": \"iD\",\n      \"type\": \"credit\",\n      \"paymentPass\": {\n        \"primaryAccountIdentifier\": \"<string>\",\n        \"primaryAccountNumberSuffix\": \"<string>\",\n        \"deviceAccountIdentifier\": \"<string>\",\n        \"deviceAccountNumberSuffix\": \"<string>\"\n      }\n    },\n    \"transactionIdentifier\": \"<string>\"\n  },\n  \"billingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  },\n  \"shippingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payments/apple-pay",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payments",
+                        "apple-pay"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"details\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:03:35.000Z",
+                  "updatedAt": "2026-07-28T01:03:35.000Z",
+                  "uid": "35240-89353be0-62da-4a5a-a621-bb8e80275635"
+                },
+                {
+                  "id": "d7ad4dc5-0761-468b-af2d-96e523a6a0d3",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"token\": {\n    \"paymentData\": {\n      \"data\": \"<string>\",\n      \"signature\": \"<string>\",\n      \"header\": {\n        \"applicationData\": \"<string>\",\n        \"ephemeralPublicKey\": \"<string>\",\n        \"wrappedKey\": \"<string>\",\n        \"publicKeyHash\": \"<string>\",\n        \"transactionId\": \"<string>\"\n      },\n      \"version\": \"RSA_v2\"\n    },\n    \"paymentMethod\": {\n      \"displayName\": \"<string>\",\n      \"network\": \"iD\",\n      \"type\": \"credit\",\n      \"paymentPass\": {\n        \"primaryAccountIdentifier\": \"<string>\",\n        \"primaryAccountNumberSuffix\": \"<string>\",\n        \"deviceAccountIdentifier\": \"<string>\",\n        \"deviceAccountNumberSuffix\": \"<string>\"\n      }\n    },\n    \"transactionIdentifier\": \"<string>\"\n  },\n  \"billingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  },\n  \"shippingContact\": {\n    \"phoneNumber\": \"<string>\",\n    \"emailAddress\": \"<email>\",\n    \"givenName\": \"<string>\",\n    \"familyName\": \"<string>\",\n    \"phoneticGivenName\": \"<string>\",\n    \"phoneticFamilyName\": \"<string>\",\n    \"addressLines\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"subLocality\": \"<string>\",\n    \"locality\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"subAdministrativeArea\": \"<string>\",\n    \"administrativeArea\": \"<string>\",\n    \"country\": \"<string>\",\n    \"countryCode\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/payments/apple-pay",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "payments",
+                        "apple-pay"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:03:35.000Z",
+                  "updatedAt": "2026-07-28T01:03:35.000Z",
+                  "uid": "35240-d7ad4dc5-0761-468b-af2d-96e523a6a0d3"
+                }
+              ],
+              "createdAt": "2026-07-28T01:03:35.000Z",
+              "updatedAt": "2026-07-28T01:03:35.000Z",
+              "uid": "35240-07a28503-a6f8-4082-94bc-ce633324fa83"
+            }
+          ],
+          "id": "42656ac5-c6b6-4e63-a359-75094e746f94",
+          "createdAt": "2026-07-28T01:03:35.000Z",
+          "updatedAt": "2026-07-28T01:03:35.000Z",
+          "uid": "35240-42656ac5-c6b6-4e63-a359-75094e746f94"
+        }
+      ],
+      "id": "4dab7132-f76b-4876-862b-b5aa8410725e",
+      "createdAt": "2026-07-28T01:03:35.000Z",
+      "updatedAt": "2026-07-28T01:03:35.000Z",
+      "uid": "35240-4dab7132-f76b-4876-862b-b5aa8410725e"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://apple-pay-gateway.apple.com/paymentservices"
+    }
+  ]
+}

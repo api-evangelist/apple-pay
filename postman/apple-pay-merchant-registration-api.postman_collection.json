@@ -1,0 +1,498 @@
+{
+  "info": {
+    "_postman_id": "658a2bb3-7057-4cba-b270-ddb1a840d901",
+    "name": "Apple Pay JS Merchant Registration API",
+    "description": "Server-side REST API used in conjunction with the Apple Pay JS client-side JavaScript API for processing Apple Pay payments on the web. Merchants call Apple's payment gateway to validate their merchant identity and obtain a payment session, which is then used by the client-side ApplePaySession to authorize payments via Touch ID or Face ID in Safari.\n\nContact Support:\n Name: Apple Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:03:32.000Z",
+    "updatedAt": "2026-07-28T01:03:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-658a2bb3-7057-4cba-b270-ddb1a840d901"
+  },
+  "item": [
+    {
+      "name": "registerMerchant",
+      "item": [
+        {
+          "name": "Register a merchant for Apple Pay on the Web",
+          "id": "16dbdb99-b8d4-435b-8697-629660722911",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"merchantIdentifier\": \"<string>\",\n  \"domainNames\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/registerMerchant",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "registerMerchant"
+              ]
+            },
+            "description": "Registers a merchant domain for Apple Pay on the Web. The merchant must host a domain verification file at /.well-known/apple-developer-merchantid-domain-association before calling this endpoint."
+          },
+          "response": [
+            {
+              "id": "29fdde85-e030-4277-86f2-9c1e95db0cd0",
+              "name": "Merchant domain registered successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantIdentifier\": \"<string>\",\n  \"domainNames\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/registerMerchant",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "registerMerchant"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"status\": \"<string>\",\n  \"merchantIdentifier\": \"<string>\",\n  \"registeredDomains\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-07-28T01:03:33.000Z",
+              "updatedAt": "2026-07-28T01:03:33.000Z",
+              "uid": "35240-29fdde85-e030-4277-86f2-9c1e95db0cd0"
+            },
+            {
+              "id": "3c1f52c3-520f-4163-a7ba-20beae73e357",
+              "name": "Invalid request or domain verification failed",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantIdentifier\": \"<string>\",\n  \"domainNames\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/registerMerchant",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "registerMerchant"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"statusCode\": \"<string>\",\n  \"statusMessage\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:03:33.000Z",
+              "updatedAt": "2026-07-28T01:03:33.000Z",
+              "uid": "35240-3c1f52c3-520f-4163-a7ba-20beae73e357"
+            },
+            {
+              "id": "d02af428-1087-474c-ad06-931a75fdc664",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"merchantIdentifier\": \"<string>\",\n  \"domainNames\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/registerMerchant",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "registerMerchant"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:03:33.000Z",
+              "updatedAt": "2026-07-28T01:03:33.000Z",
+              "uid": "35240-d02af428-1087-474c-ad06-931a75fdc664"
+            }
+          ],
+          "createdAt": "2026-07-28T01:03:33.000Z",
+          "updatedAt": "2026-07-28T01:03:33.000Z",
+          "uid": "35240-16dbdb99-b8d4-435b-8697-629660722911"
+        }
+      ],
+      "id": "3c9bc074-cc43-43c8-9901-e6b422b39a93",
+      "createdAt": "2026-07-28T01:03:33.000Z",
+      "updatedAt": "2026-07-28T01:03:33.000Z",
+      "uid": "35240-3c9bc074-cc43-43c8-9901-e6b422b39a93"
+    },
+    {
+      "name": "domains",
+      "item": [
+        {
+          "name": "Apple Pay List registered merchant domains",
+          "id": "0fa891f7-03cc-4d04-b134-f498941aca7c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/domains?merchantIdentifier=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "domains"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The merchant identifier issued by Apple",
+                  "key": "merchantIdentifier",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Returns a list of domains that have been registered for Apple Pay on the Web for the authenticated merchant."
+          },
+          "response": [
+            {
+              "id": "dc342cd0-2801-4e77-90a6-dabd4e6dd893",
+              "name": "List of registered domains",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/domains?merchantIdentifier=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "domains"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The merchant identifier issued by Apple",
+                      "key": "merchantIdentifier",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"merchantIdentifier\": \"<string>\",\n  \"domainNames\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "createdAt": "2026-07-28T01:03:33.000Z",
+              "updatedAt": "2026-07-28T01:03:33.000Z",
+              "uid": "35240-dc342cd0-2801-4e77-90a6-dabd4e6dd893"
+            },
+            {
+              "id": "8b527513-bb05-4ff9-947f-df5020644987",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/domains?merchantIdentifier=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "domains"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The merchant identifier issued by Apple",
+                      "key": "merchantIdentifier",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:03:33.000Z",
+              "updatedAt": "2026-07-28T01:03:33.000Z",
+              "uid": "35240-8b527513-bb05-4ff9-947f-df5020644987"
+            }
+          ],
+          "createdAt": "2026-07-28T01:03:33.000Z",
+          "updatedAt": "2026-07-28T01:03:33.000Z",
+          "uid": "35240-0fa891f7-03cc-4d04-b134-f498941aca7c"
+        },
+        {
+          "name": "Apple Pay Remove a registered merchant domain",
+          "id": "e4294935-5157-4ece-9593-274cc178c967",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/domains?merchantIdentifier=<string>&domainName=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "domains"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The merchant identifier issued by Apple",
+                  "key": "merchantIdentifier",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) The domain name to remove",
+                  "key": "domainName",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Removes a previously registered domain from the merchant's Apple Pay on the Web configuration."
+          },
+          "response": [
+            {
+              "id": "b76dfb5b-311c-4f5e-aec4-67ad06ff1b20",
+              "name": "Domain removed successfully",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/domains?merchantIdentifier=<string>&domainName=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "domains"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The merchant identifier issued by Apple",
+                      "key": "merchantIdentifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The domain name to remove",
+                      "key": "domainName",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:03:33.000Z",
+              "updatedAt": "2026-07-28T01:03:33.000Z",
+              "uid": "35240-b76dfb5b-311c-4f5e-aec4-67ad06ff1b20"
+            },
+            {
+              "id": "73f1c31a-bd73-4567-8f8d-ded5666e4a09",
+              "name": "Authentication failed",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/domains?merchantIdentifier=<string>&domainName=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "domains"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The merchant identifier issued by Apple",
+                      "key": "merchantIdentifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The domain name to remove",
+                      "key": "domainName",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:03:33.000Z",
+              "updatedAt": "2026-07-28T01:03:33.000Z",
+              "uid": "35240-73f1c31a-bd73-4567-8f8d-ded5666e4a09"
+            },
+            {
+              "id": "85089e18-df38-472a-bb53-59a10599ac91",
+              "name": "Domain not found",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/domains?merchantIdentifier=<string>&domainName=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "domains"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The merchant identifier issued by Apple",
+                      "key": "merchantIdentifier",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) The domain name to remove",
+                      "key": "domainName",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:03:33.000Z",
+              "updatedAt": "2026-07-28T01:03:33.000Z",
+              "uid": "35240-85089e18-df38-472a-bb53-59a10599ac91"
+            }
+          ],
+          "createdAt": "2026-07-28T01:03:33.000Z",
+          "updatedAt": "2026-07-28T01:03:33.000Z",
+          "uid": "35240-e4294935-5157-4ece-9593-274cc178c967"
+        }
+      ],
+      "id": "16cf24b2-9efe-47a0-8566-1eee54092474",
+      "createdAt": "2026-07-28T01:03:33.000Z",
+      "updatedAt": "2026-07-28T01:03:33.000Z",
+      "uid": "35240-16cf24b2-9efe-47a0-8566-1eee54092474"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://apple-pay-gateway.apple.com/paymentservices"
+    }
+  ]
+}
