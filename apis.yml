@@ -21,7 +21,7 @@ image: https://developer.apple.com/assets/elements/icons/apple-pay/apple-pay-96x
 created: '2024-01-01'
 modified: '2026-05-19'
 url: https://developer.apple.com/apple-pay/
-specificationVersion: '0.18'
+specificationVersion: '0.23'
 tags:
   - Apple
   - Contactless Payments
