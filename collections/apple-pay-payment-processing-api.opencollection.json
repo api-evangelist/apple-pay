@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apple Pay JS Merchant Registration Payment Processing API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payment Processing",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Process an Apple Pay payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apple-pay-gateway.apple.com/paymentservices/payments/apple-pay",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Receives an Apple Pay payment token from the client application, decrypts the payment data using the merchant's payment processing certificate, and submits the payment credentials to the payment processor or acquiring bank for authorization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

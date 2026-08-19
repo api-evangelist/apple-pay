@@ -1,0 +1,161 @@
+{
+  "item": [
+    {
+      "id": "95313b72-5b21-415c-9c9a-394b8bf1773b",
+      "name": "Payment Status",
+      "description": {
+        "content": "Endpoints for checking payment transaction status",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a291b6ae-0940-4d3a-8280-d5dec26b08f2",
+          "name": "Apple Pay Get payment transaction status",
+          "request": {
+            "name": "Apple Pay Get payment transaction status",
+            "description": {
+              "content": "Retrieves the status of a previously submitted Apple Pay payment transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payments",
+                "apple-pay",
+                ":transactionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "transactionId",
+                  "description": "(Required) Unique transaction identifier returned from payment processing"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "377ba780-417a-4a06-83e9-ff02c3383ec5",
+              "name": "Transaction status retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "apple-pay",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Unique transaction identifier returned from payment processing"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"transactionId\": \"string\",\n  \"status\": \"authorized\",\n  \"authorizationCode\": \"string\",\n  \"amount\": 5095.554182761338,\n  \"currency\": \"string\",\n  \"processedAt\": \"2020-12-14T11:39:19.267Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eda98476-c7b5-44ba-a653-2a9f4dd531a3",
+              "name": "Transaction not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payments",
+                    "apple-pay",
+                    ":transactionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "transactionId",
+                      "description": "(Required) Unique transaction identifier returned from payment processing"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://apple-pay-gateway.apple.com/paymentservices",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "aecdade8-5677-429f-93fd-5580e413015b",
+    "name": "Apple Pay JS Merchant Registration Payment Status API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Server-side REST API used in conjunction with the Apple Pay JS client-side JavaScript API for processing Apple Pay payments on the web. Merchants call Apple's payment gateway to validate their merchant identity and obtain a payment session, which is then used by the client-side ApplePaySession to authorize payments via Touch ID or Face ID in Safari.\n\nContact Support:\n Name: Apple Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

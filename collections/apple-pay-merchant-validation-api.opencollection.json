@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Apple Pay JS Merchant Registration Merchant Validation API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Merchant Validation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request an Apple Pay payment session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://apple-pay-gateway.apple.com/paymentservices/paymentSession",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validates the merchant and returns an opaque payment session object. The merchant server calls this endpoint when the client-side ApplePaySession triggers the onvalidatemerchant event. The response must be passed back to the client via session.completeMerchantValidation(). Requires mutual TLS authentication using the merchant identity certificate."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
