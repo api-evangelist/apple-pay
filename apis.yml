@@ -4,6 +4,18 @@ description: >-
   Wallet. It supports Touch ID, Face ID, and Apple Watch authentication for both in-person and online payments. Apple
   Pay is available on iOS, watchOS, macOS, and via Safari on the web through the Apple Pay JS API, with a PassKit native
   framework for iOS/watchOS app integration.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: approval
