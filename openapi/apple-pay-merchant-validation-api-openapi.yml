@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Apple Pay JS Merchant Registration Merchant Validation API
+  title: Apple Pay JS Merchant Validation API
   description: Server-side REST API used in conjunction with the Apple Pay JS client-side JavaScript API for processing Apple Pay payments on the web. Merchants call Apple's payment gateway to validate their merchant identity and obtain a payment session, which is then used by the client-side ApplePaySession to authorize payments via Touch ID or Face ID in Safari.
   version: '1.0'
   contact:
@@ -50,6 +50,15 @@ paths:
           description: Internal server error
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          description: Error status code
+        statusMessage:
+          type: string
+          description: Human-readable error message
     PaymentSessionResponse:
       type: object
       description: An opaque payment session object that should be passed to the client-side ApplePaySession.completeMerchantValidation() method
@@ -114,15 +123,6 @@ components:
           type: string
           description: The fully qualified domain name associated with the merchant. Must match a verified merchant domain
           example: mystore.example.com
-    ErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: string
-          description: Error status code
-        statusMessage:
-          type: string
-          description: Human-readable error message
   securitySchemes:
     merchantCertificate:
       type: mutualTLS

@@ -1,19 +1,19 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Apple Pay JS Merchant Registration Payment Status API
-  description: Server-side REST API used in conjunction with the Apple Pay JS client-side JavaScript API for processing Apple Pay payments on the web. Merchants call Apple's payment gateway to validate their merchant identity and obtain a payment session, which is then used by the client-side ApplePaySession to authorize payments via Touch ID or Face ID in Safari.
+  title: Apple Pay Payment Token Payment Status API
+  description: Server-side specification for processing Apple Pay payment tokens. When a customer authorizes an Apple Pay payment, the client application receives an encrypted payment token containing the payment credential. The merchant server or payment service provider must decrypt and process this token to complete the transaction. This specification documents the payment token structure and the merchant server endpoints for receiving and processing payment tokens.
   version: '1.0'
   contact:
     name: Apple Developer Support
     url: https://developer.apple.com/support/apple-pay/
   termsOfService: https://developer.apple.com/apple-pay/acceptable-use-guidelines/
 servers:
-- url: https://apple-pay-gateway.apple.com/paymentservices
-  description: Apple Pay Production Gateway
-- url: https://apple-pay-gateway-nc-pod5.apple.com/paymentservices
-  description: Apple Pay Sandbox Gateway
-security:
-- merchantCertificate: []
+- url: https://{merchantServer}
+  description: Merchant payment processing server
+  variables:
+    merchantServer:
+      default: api.example.com
+      description: The merchant's payment processing server hostname
 tags:
 - name: Payment Status
   description: Endpoints for checking payment transaction status
@@ -37,6 +37,14 @@ paths:
         '404':
           description: Transaction not found
 components:
+  parameters:
+    transactionId:
+      name: transactionId
+      in: path
+      required: true
+      description: Unique transaction identifier returned from payment processing
+      schema:
+        type: string
   schemas:
     PaymentResult:
       type: object
@@ -67,18 +75,6 @@ components:
           type: string
           format: date-time
           description: Timestamp when the payment was processed
-  parameters:
-    transactionId:
-      name: transactionId
-      in: path
-      required: true
-      description: Unique transaction identifier returned from payment processing
-      schema:
-        type: string
-  securitySchemes:
-    merchantCertificate:
-      type: mutualTLS
-      description: Mutual TLS authentication using the Apple Pay Merchant Identity Certificate. The certificate is obtained from the Apple Developer portal and must be associated with the merchant identifier.
 externalDocs:
-  description: Apple Pay on the Web Documentation
-  url: https://developer.apple.com/documentation/apple_pay_on_the_web
+  description: Payment Token Format Reference
+  url: https://developer.apple.com/documentation/passkit/apple_pay/payment_token_format_reference
