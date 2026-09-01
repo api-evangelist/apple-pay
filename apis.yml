@@ -70,7 +70,7 @@ apis:
   humanURL: https://developer.apple.com/documentation/apple_pay_on_the_web
   baseURL: https://apple-pay-gateway.apple.com
   tags:
-  - Merchant Registration
+  - Merchant  Registration
   tags_raw:
   - Merchant Registration
   properties:
