@@ -170,6 +170,8 @@ maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
 common:
+  - type: Website
+    url: https://www.apple.com/
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/apple-pay/overview
   - type: AgenticAccess
