@@ -37,14 +37,6 @@ paths:
         '404':
           description: Transaction not found
 components:
-  parameters:
-    transactionId:
-      name: transactionId
-      in: path
-      required: true
-      description: Unique transaction identifier returned from payment processing
-      schema:
-        type: string
   schemas:
     PaymentResult:
       type: object
@@ -75,6 +67,14 @@ components:
           type: string
           format: date-time
           description: Timestamp when the payment was processed
+  parameters:
+    transactionId:
+      name: transactionId
+      in: path
+      required: true
+      description: Unique transaction identifier returned from payment processing
+      schema:
+        type: string
 externalDocs:
   description: Payment Token Format Reference
   url: https://developer.apple.com/documentation/passkit/apple_pay/payment_token_format_reference

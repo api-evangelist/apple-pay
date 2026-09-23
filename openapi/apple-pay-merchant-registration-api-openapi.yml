@@ -97,26 +97,6 @@ paths:
           description: Domain not found
 components:
   schemas:
-    MerchantDomainsResponse:
-      type: object
-      properties:
-        merchantIdentifier:
-          type: string
-          description: The merchant identifier
-        domainNames:
-          type: array
-          items:
-            type: string
-          description: List of registered domain names
-    ErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: string
-          description: Error status code
-        statusMessage:
-          type: string
-          description: Human-readable error message
     MerchantRegistrationResponse:
       type: object
       properties:
@@ -145,6 +125,26 @@ components:
           items:
             type: string
           description: List of domain names to register for Apple Pay
+    MerchantDomainsResponse:
+      type: object
+      properties:
+        merchantIdentifier:
+          type: string
+          description: The merchant identifier
+        domainNames:
+          type: array
+          items:
+            type: string
+          description: List of registered domain names
+    ErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          description: Error status code
+        statusMessage:
+          type: string
+          description: Human-readable error message
   securitySchemes:
     merchantCertificate:
       type: mutualTLS

@@ -50,15 +50,6 @@ paths:
           description: Internal server error
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: string
-          description: Error status code
-        statusMessage:
-          type: string
-          description: Human-readable error message
     PaymentSessionResponse:
       type: object
       description: An opaque payment session object that should be passed to the client-side ApplePaySession.completeMerchantValidation() method
@@ -96,6 +87,15 @@ components:
         pspId:
           type: string
           description: Payment service provider identifier
+    ErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          description: Error status code
+        statusMessage:
+          type: string
+          description: Human-readable error message
     PaymentSessionRequest:
       type: object
       required:
