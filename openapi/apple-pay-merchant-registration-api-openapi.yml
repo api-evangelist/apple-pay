@@ -111,6 +111,17 @@ components:
           items:
             type: string
           description: List of successfully registered domains
+    MerchantDomainsResponse:
+      type: object
+      properties:
+        merchantIdentifier:
+          type: string
+          description: The merchant identifier
+        domainNames:
+          type: array
+          items:
+            type: string
+          description: List of registered domain names
     MerchantRegistrationRequest:
       type: object
       required:
@@ -125,17 +136,6 @@ components:
           items:
             type: string
           description: List of domain names to register for Apple Pay
-    MerchantDomainsResponse:
-      type: object
-      properties:
-        merchantIdentifier:
-          type: string
-          description: The merchant identifier
-        domainNames:
-          type: array
-          items:
-            type: string
-          description: List of registered domain names
     ErrorResponse:
       type: object
       properties:
