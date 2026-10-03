@@ -97,6 +97,17 @@ paths:
           description: Domain not found
 components:
   schemas:
+    MerchantDomainsResponse:
+      type: object
+      properties:
+        merchantIdentifier:
+          type: string
+          description: The merchant identifier
+        domainNames:
+          type: array
+          items:
+            type: string
+          description: List of registered domain names
     MerchantRegistrationResponse:
       type: object
       properties:
@@ -111,17 +122,6 @@ components:
           items:
             type: string
           description: List of successfully registered domains
-    MerchantDomainsResponse:
-      type: object
-      properties:
-        merchantIdentifier:
-          type: string
-          description: The merchant identifier
-        domainNames:
-          type: array
-          items:
-            type: string
-          description: List of registered domain names
     MerchantRegistrationRequest:
       type: object
       required:

@@ -77,15 +77,6 @@ components:
           type: string
           description: The fully qualified domain name associated with the merchant. Must match a verified merchant domain
           example: mystore.example.com
-    ErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: string
-          description: Error status code
-        statusMessage:
-          type: string
-          description: Human-readable error message
     PaymentSessionResponse:
       type: object
       description: An opaque payment session object that should be passed to the client-side ApplePaySession.completeMerchantValidation() method
@@ -123,6 +114,15 @@ components:
         pspId:
           type: string
           description: Payment service provider identifier
+    ErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          description: Error status code
+        statusMessage:
+          type: string
+          description: Human-readable error message
   securitySchemes:
     merchantCertificate:
       type: mutualTLS
