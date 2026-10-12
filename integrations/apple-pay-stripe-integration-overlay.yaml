@@ -1,0 +1,30 @@
+# DERIVED by build-integration-preconfigs.py (roadmap#949). Overlay on the PARTNER's contract:
+# where stripe's enum names apple-pay, and what that value is.
+overlay: 1.0.0
+info:
+  title: apple-pay as a payment-method in stripe's contract
+  version: 1.0.0
+extends: https://raw.githubusercontent.com/api-evangelist/stripe/refs/heads/main/openapi/stripe-issuing-api-openapi.yml
+actions:
+- target: $.components.schemas['issuing.transaction'].properties.wallet
+  update:
+    x-apievangelist-integration:
+      values:
+        apple_pay:
+          provider: apple-pay
+          relationship: payment-method
+          evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-issuing-api-openapi.yml
+      method: derived
+      generated: '2026-10-12'
+      generator: build-integration-preconfigs.py
+- target: $.components.schemas['issuing.token'].properties.wallet_provider
+  update:
+    x-apievangelist-integration:
+      values:
+        apple_pay:
+          provider: apple-pay
+          relationship: payment-method
+          evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-issuing-api-openapi.yml
+      method: derived
+      generated: '2026-10-12'
+      generator: build-integration-preconfigs.py

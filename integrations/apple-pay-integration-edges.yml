@@ -1,0 +1,61 @@
+generated: '2026-10-12'
+method: searched
+source:
+- https://zapier.com/apps/apple-pay/integrations
+- https://n8n.io/integrations/apple-pay/
+- https://composio.dev/toolkits/apple-pay
+- https://monid.ai/tools/apple-pay
+checked:
+- https://composio.dev/toolkits/apple-pay
+- https://monid.ai/tools/apple-pay
+- https://n8n.io/integrations/apple-pay/
+- https://zapier.com/apps/apple-pay/integrations
+summary: null
+marketplace_apps: []
+edges:
+- partner_name: adyen
+  partner: adyen
+  partner_match: domain
+  type: contract
+  channel: partner-built
+  relationship: payment-method
+  direction: partner-built
+  evidence: https://github.com/api-evangelist/adyen/blob/main/openapi/adyen-merchants-api-openapi.yml
+  contract_reference:
+    repo: adyen
+    spec_file: adyen-merchants-api-openapi.yml
+    value: applepay
+    property: schemas.PaymentMethodSetupInfo
+    detected_by: detect-payment-method-edges.py
+    detected: '2026-10-12'
+- partner_name: aghanim
+  partner: aghanim
+  partner_match: domain
+  type: contract
+  channel: partner-built
+  relationship: payment-method
+  direction: partner-built
+  evidence: https://github.com/api-evangelist/aghanim/blob/main/openapi/aghanim-orders-api-openapi.yml
+  contract_reference:
+    repo: aghanim
+    spec_file: aghanim-orders-api-openapi.yml
+    value: apple_pay
+    property: components.schemas.PublicPaymentMethod
+    detected_by: detect-payment-method-edges.py
+    detected: '2026-10-12'
+- partner_name: stripe
+  partner: stripe
+  partner_match: domain
+  type: contract
+  channel: partner-built
+  relationship: payment-method
+  direction: partner-built
+  evidence: https://github.com/api-evangelist/stripe/blob/main/openapi/stripe-issuing-api-openapi.yml
+  contract_reference:
+    repo: stripe
+    spec_file: stripe-issuing-api-openapi.yml
+    value: apple_pay
+    property: issuing.transaction.wallet
+    detected_by: detect-payment-method-edges.py
+    detected: '2026-10-12'
+templates: []

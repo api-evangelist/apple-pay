@@ -1,0 +1,30 @@
+# DERIVED by build-integration-preconfigs.py (roadmap#949). Overlay on the PARTNER's contract:
+# where adyen's enum names apple-pay, and what that value is.
+overlay: 1.0.0
+info:
+  title: apple-pay as a payment-method in adyen's contract
+  version: 1.0.0
+extends: https://raw.githubusercontent.com/api-evangelist/adyen/refs/heads/main/openapi/adyen-merchants-api-openapi.yml
+actions:
+- target: $.components.schemas.PaymentMethodSetupInfo.properties.type
+  update:
+    x-apievangelist-integration:
+      values:
+        applepay:
+          provider: apple-pay
+          relationship: payment-method
+          evidence: https://github.com/api-evangelist/adyen/blob/main/openapi/adyen-merchants-api-openapi.yml
+      method: derived
+      generated: '2026-10-12'
+      generator: build-integration-preconfigs.py
+- target: $.components.schemas.PaymentMethodResponse.properties.typesWithErrors.items
+  update:
+    x-apievangelist-integration:
+      values:
+        applepay:
+          provider: apple-pay
+          relationship: payment-method
+          evidence: https://github.com/api-evangelist/adyen/blob/main/openapi/adyen-merchants-api-openapi.yml
+      method: derived
+      generated: '2026-10-12'
+      generator: build-integration-preconfigs.py
