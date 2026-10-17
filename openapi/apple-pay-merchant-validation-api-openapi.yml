@@ -87,15 +87,6 @@ components:
         pspId:
           type: string
           description: Payment service provider identifier
-    ErrorResponse:
-      type: object
-      properties:
-        statusCode:
-          type: string
-          description: Error status code
-        statusMessage:
-          type: string
-          description: Human-readable error message
     PaymentSessionRequest:
       type: object
       required:
@@ -123,6 +114,15 @@ components:
           type: string
           description: The fully qualified domain name associated with the merchant. Must match a verified merchant domain
           example: mystore.example.com
+    ErrorResponse:
+      type: object
+      properties:
+        statusCode:
+          type: string
+          description: Error status code
+        statusMessage:
+          type: string
+          description: Human-readable error message
   securitySchemes:
     merchantCertificate:
       type: mutualTLS
