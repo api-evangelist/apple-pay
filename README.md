@@ -1,4 +1,4 @@
-# Apple Pay (apple-pay)
+# Apple Pay
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,110 +66,172 @@
 
 Apple Pay enables secure, frictionless payments in apps and on the web using the payment cards stored in users' Apple Wallet. It supports Touch ID, Face ID, and Apple Watch authentication for both in-person and online payments. Apple Pay is available on iOS, watchOS, macOS, and via Safari on the web through the Apple Pay JS API, with a PassKit native framework for iOS/watchOS app integration.
 
-**APIs.json:** [https://developer.apple.com/apple-pay/](https://developer.apple.com/apple-pay/)
+**Areas:** Apple · Contactless Payments · Digital Wallet · E-Commerce · Mobile Payments · Payments
 
-## Tags
+## Apple Pay on APIs.io
 
-- Apple
-- Contactless Payments
-- Digital Wallet
-- E-Commerce
-- Mobile Payments
-- Payments
+Everything profiled for Apple Pay is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/apple-pay/](https://apis.io/providers/apple-pay/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (5)
 
-- **Created:** 2024-01-01
-- **Modified:** 2026-05-19
+- [PassKit Framework (Apple Pay)](https://apis.io/apis/apple-pay/passkit-framework-apple-pay/) — Native iOS, watchOS, and macOS framework for integrating Apple Pay into mobile and desktop applications. Provides PKPaymentRequest and…
+- [Apple Pay Merchant Registration API](https://apis.io/apis/apple-pay/apple-pay-merchant-registration-api/) — Register and manage merchant domains for Apple Pay on the Web
+- [Apple Pay Merchant Validation API](https://apis.io/apis/apple-pay/apple-pay-merchant-validation-api/) — Validate merchant identity and obtain payment sessions
+- [Apple Pay Payment Processing API](https://apis.io/apis/apple-pay/apple-pay-payment-processing-api/) — Endpoints for receiving and processing Apple Pay payment tokens
+- [Apple Pay Payment Status API](https://apis.io/apis/apple-pay/apple-pay-payment-status-api/) — Endpoints for checking payment transaction status
 
-## APIs
+### Published properties
 
-### Apple Pay JS API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Server-side REST API for Apple Pay on the Web, enabling merchants to validate their identity with Apple and obtain payment sessions used by the ApplePaySession JavaScript API in Safari. Supports Touch ID and Face ID for frictionless web checkout.
+#### Agentic access (1)
 
-- **Human URL:** [https://developer.apple.com/documentation/apple_pay_on_the_web](https://developer.apple.com/documentation/apple_pay_on_the_web)
-- **Base URL:** `https://apple-pay-gateway.apple.com`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Apple Pay Agentic Access](https://apis.io/agentic-access/apple-pay/apple-pay-agentic-access/)
 
-- Javascript
-- Safari
-- Web Payments
+#### JSON Schema (2)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://developer.apple.com/documentation/apple_pay_on_the_web)
-- [Getting Started](https://developer.apple.com/apple-pay/implementation/)
-- [API Reference](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypaymentrequest)
-- [Sandbox](https://developer.apple.com/apple-pay/sandbox-testing/)
-- [OpenAPI](openapi/apple-pay-js-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/apple-pay-js.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/apple-pay-js.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/apple-pay-payment-request-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [Apple Pay Payment Request](https://apis.io/schemas/apple-pay/apple-pay-payment-request/)
+- [Apple Pay Payment Token](https://apis.io/schemas/apple-pay/apple-pay-payment-token/)
 
-### PassKit Framework (Apple Pay)
+#### JSON Structure (2)
 
-Native iOS, watchOS, and macOS framework for integrating Apple Pay into mobile and desktop applications. Provides PKPaymentRequest and PKPaymentAuthorizationViewController for in-app Apple Pay checkout.
+Data models expressed in JSON Structure.
 
-- **Human URL:** [https://developer.apple.com/documentation/passkit](https://developer.apple.com/documentation/passkit)
-- **Base URL:** `Native Framework`
+- [Apple Pay Payment Request Structure](https://apis.io/json-structure/apple-pay/apple-pay-payment-request-structure/)
+- [Apple Pay Payment Token Structure](https://apis.io/json-structure/apple-pay/apple-pay-payment-token-structure/)
 
-#### Tags
+#### JSON-LD (1)
 
-- iOS
-- Mobile
-- Native
-- Swift
+Linked-data contexts for the provider's vocabulary.
 
-#### Properties
+- [Apple Pay Context](https://apis.io/jsonld/apple-pay/apple-pay-context/)
 
-- [Documentation](https://developer.apple.com/documentation/passkit/apple_pay)
-- [API Reference](https://developer.apple.com/documentation/passkit/pkpaymentrequest)
-- [Code Examples](https://developer.apple.com/documentation/passkit/apple_pay/offering_apple_pay)
-- [YouTube](https://developer.apple.com/videos/frameworks/wallet-and-apple-pay)
-- [Postman Collection](collections/apple-pay-js.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/apple-pay-js.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/apple-pay-payment-token.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/apple-pay-payment-token.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Vocabulary (1)
 
-### Apple Pay Payment Token API
+The provider's domain terms, defined.
 
-Server-side specification for processing and decrypting Apple Pay payment tokens received from client applications. Tokens use EC_v1 or RSA_v1 encryption and contain the payment authorization data for charge processing.
+- [Apple Pay Vocabulary](https://apis.io/vocabularies/apple-pay/apple-pay-vocabulary/)
 
-- **Human URL:** [https://developer.apple.com/documentation/passkit/apple_pay/payment_token_format_reference](https://developer.apple.com/documentation/passkit/apple_pay/payment_token_format_reference)
-- **Base URL:** `Merchant Server`
+#### Examples (2)
 
-#### Tags
+Example requests and responses.
 
-- Encryption
-- Payment Processing
-- Server-Side
+- [Apple Pay Payment Request Example](https://apis.io/examples/apple-pay/apple-pay-payment-request-example/)
+- [Apple Pay Payment Token Example](https://apis.io/examples/apple-pay/apple-pay-payment-token-example/)
 
-#### Properties
+#### Collections (10)
 
-- [Documentation](https://developer.apple.com/documentation/passkit/apple_pay/payment_token_format_reference)
-- [OpenAPI](openapi/apple-pay-payment-token-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/apple-pay-payment-token.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/apple-pay-payment-token.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/apple-pay-payment-token-schema.json) — [JSON Schema](https://json-schema.org/specification)
+Postman and Open Collection request collections.
 
-## Common Properties
+- [Apple Pay JS API](https://apis.io/collections/apple-pay/open-apple-pay-js/)
+- [Apple Pay JS Merchant Registration API](https://apis.io/collections/apple-pay/open-apple-pay-merchant-registration-api/)
+- [Apple Pay JS Merchant Registration Merchant Validation API](https://apis.io/collections/apple-pay/open-apple-pay-merchant-validation-api/)
+- [Apple Pay JS Merchant Registration Payment Processing API](https://apis.io/collections/apple-pay/open-apple-pay-payment-processing-api/)
+- [Apple Pay JS Merchant Registration Payment Status API](https://apis.io/collections/apple-pay/open-apple-pay-payment-status-api/)
+- [Apple Pay Payment Token API](https://apis.io/collections/apple-pay/open-apple-pay-payment-token/)
+- [Apple Pay JS Merchant Registration API](https://apis.io/collections/apple-pay/postman-apple-pay-merchant-registration-api/)
+- [Apple Pay JS Merchant Registration Merchant Validation API](https://apis.io/collections/apple-pay/postman-apple-pay-merchant-validation-api/)
+- [Apple Pay JS Merchant Registration Payment Processing API](https://apis.io/collections/apple-pay/postman-apple-pay-payment-processing-api/)
+- [Apple Pay JS Merchant Registration Payment Status API](https://apis.io/collections/apple-pay/postman-apple-pay-payment-status-api/)
 
-- [Portal](https://developer.apple.com/account/)
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Apple Pay — jsonschema rules](https://apis.io/rules/apple-pay/apple-pay-jsonschema-spectral-rules/)
+- [Apple Pay API Rules](https://apis.io/rules/apple-pay/apple-pay-spectral-rules/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Apple Pay Authentication](https://apis.io/security/apple-pay/apple-pay-authentication/)
+- [Apple Pay Domain Security](https://apis.io/security/apple-pay/apple-pay-domain-security/)
+- [Apple Pay Vulnerability Disclosure](https://apis.io/security/apple-pay/apple-pay-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Apple Pay Plans Pricing](https://apis.io/plans/apple-pay/apple-pay-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Apple Pay Rate Limits](https://apis.io/rate-limits/apple-pay/apple-pay-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Apple Pay Finops](https://apis.io/finops/apple-pay/apple-pay-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.apple.com/)
+- [Getting started](https://developer.apple.com/apple-pay/get-started/)
 - [Support](https://developer.apple.com/support/apple-pay/)
-- [Terms of Service](https://developer.apple.com/apple-pay/acceptable-use-guidelines/)
-- [Getting Started](https://developer.apple.com/apple-pay/get-started/)
-- [Branding](https://developer.apple.com/apple-pay/marketing/)
-- [Status Page](https://developer.apple.com/system-status/)
-- [JSON-LD](json-ld/apple-pay-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Spectral Rules](rules/apple-pay-spectral-rules.yml)
-- [Vocabulary](vocabulary/apple-pay-vocabulary.yaml)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
+- [Terms of service](https://developer.apple.com/apple-pay/acceptable-use-guidelines/)
+- [Status](https://developer.apple.com/system-status/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 44.3** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 64.6 |
+| Contract governance | 27.3 |
+| Operational transparency | 34.2 |
+| Developer ergonomics | 63.1 |
+| Access clarity | 5.3 |
+
+**Agent readiness 31.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bound |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | documented (partial credit) |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 20.5** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/apple-pay/](https://apis.io/providers/apple-pay/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Apple Pay: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/apple-pay/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
